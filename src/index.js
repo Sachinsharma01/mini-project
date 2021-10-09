@@ -1,17 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import { AppLayer } from './base/context'
+import { reducer, initialState } from './base/reducer'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <AppLayer initialValues={initialState} reducer={reducer}>
     <App />
-  </React.StrictMode>,
+  </AppLayer>,
   document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+)
