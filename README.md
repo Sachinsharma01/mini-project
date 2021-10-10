@@ -2,7 +2,7 @@
 
 ## DO NOT CHANGE ANYTHING IN INDEX.JS AND APP.JS
 
-## Make branches for making changes in code for easy identification of data
+## Make branches for making changes in code for easy identification of changes
 
 after cloning the project run `npm install`
 it will install all the required files for the project for development
