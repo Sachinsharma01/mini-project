@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+}
+.main h1 {
+  margin: 10px;
+}
+.name {
+  display: flex;
+}
+.main input {
+  padding: 10px;
+  width: 90%;
+  background: #edeaff;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+  display: inline;
+}
+.main input:focus {
+  outline: 1px solid #6588de;
+}
+.main button {
+  background: #6588de;
+  border: none;
+  width: 94%;
+  color: white;
+  font-size: 1rem;
+  font-weight: medium;
+  height: 40px;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+.main button:hover {
+  transform: scale(1.1);
+}
+.social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.social button {
+  width: 30%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+

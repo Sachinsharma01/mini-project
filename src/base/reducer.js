@@ -1,5 +1,5 @@
 export const initialState = {
-  user = {}
+  user:{}
 }
 
 export const reducer = (state, action) => {
