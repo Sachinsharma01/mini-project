@@ -1,10 +1,11 @@
 export const initialState = {
   user: {},
   showContactCard: false,
-  searchQuery: ""
+  searchQuery: "",
+  senderUser: {}
 }
 
-export const reducer = (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "SET_USER": 
     return {
@@ -21,7 +22,14 @@ export const reducer = (state, action) => {
           ...state,
           searchQuery: action.payload
         }
+      case "SET_SENDER":
+        return {
+          ...state,
+          senderUser: action.payload
+        }
       default:
         return state
   }
 }
+
+export default reducer;
