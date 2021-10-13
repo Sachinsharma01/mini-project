@@ -1,0 +1,21 @@
+@import url("../../base/main.css");
+
+.userIcon {
+    display: inline-block;
+    position: relative;
+}
+
+.userIcon__image {
+    border-radius: 50%;
+    border: 3px var(--orange) solid;
+    background-color: var(--orange);
+}
+
+.userIcon__online {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    right: 5px;
+    bottom: 10%;
+}

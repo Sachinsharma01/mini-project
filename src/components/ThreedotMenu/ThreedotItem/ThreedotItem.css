@@ -1,0 +1,11 @@
+@import url("../../../base/main.css");
+
+.threeDotItem {
+    font-size: 1.15rem;
+    padding: 15px 25px; 
+    transition: 0.5s;
+}
+
+.threeDotItem:hover {
+    background-color: rgb(191, 219, 255);
+}
