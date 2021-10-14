@@ -1,7 +1,11 @@
 @import url("../../base/main.css");
 
 .header {
+    box-shadow: var(--blue-shadow);
+    background-color: var(--blue);
     display: flex;
+    align-items: center;
+    padding-right: 10em;
 }
 
 .header__currentUser, .header__senderUser {
@@ -40,4 +44,11 @@
 
 .header__currentUser div, .header__senderUser div {
     display: flex;
+    align-items: center;
+}
+
+.header__senderUser div h2 {
+    margin-left: 20px;
+    text-transform: capitalize;
+    color: white
 }

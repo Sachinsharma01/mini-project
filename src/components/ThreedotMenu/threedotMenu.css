@@ -49,15 +49,18 @@
 
 .threeDotsMenu {
     position: absolute;
-    bottom: -3em;
+    top: 3em;
     min-width: 10rem;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
     background-color: var(--light-blue);
     border-radius: 10px;
     box-shadow: var(--blue-shadow);
+    padding: 0;
 }
 
 .threeDotItem {
+    min-width: 10rem;
     font-size: 1.15rem;
     padding: 15px 25px; 
     transition: 0.5s;

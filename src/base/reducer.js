@@ -1,6 +1,7 @@
 export const initialState = {
   user: {
-    userName: "hello"
+    userName: "hello",
+    available: true
   },
   searchQuery: "",
   senderUser: {
@@ -16,10 +17,12 @@ const reducer = (state, action) => {
       ...state,
       user: action.payload
     }
-    case "SET_SHOW_CONTACT_CARD":
+    case "SET_USER_AVAILABLE":
       return {
         ...state,
-        showContactCard: action.payload
+        user: {
+          ...state.user, available: action.payload
+        }
       }
       case "SET_SEARCH":
         return {
