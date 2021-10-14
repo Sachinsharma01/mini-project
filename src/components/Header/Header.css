@@ -1,1 +1,43 @@
 @import url("../../base/main.css");
+
+.header {
+    display: flex;
+}
+
+.header__currentUser, .header__senderUser {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    background-color: var(--light-blue);
+}
+
+.header__senderUser {
+    flex-grow: 5;
+    background-color: var(--blue);
+}
+
+.currentUser__availability {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.currentUser__availability h2 {
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.currentUser__availability select {
+    padding: 5px 20px;
+    border: none;
+    outline: none;
+    background-color: var(--blue);
+    font-size: 1.15rem;
+    color: var(--light-blue)
+}
+
+.header__currentUser div, .header__senderUser div {
+    display: flex;
+}

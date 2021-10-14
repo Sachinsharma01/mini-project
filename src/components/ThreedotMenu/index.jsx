@@ -19,7 +19,7 @@ const ThreedotMenu = ({children, white}) => {
     }, [show])
 
     return (
-        <div ref={dots}>
+        <div ref={dots} style={{position: "relative"}}>
             <div className="threeDotsDiv" onClick={() => setShow((state) => !state)}>
                 <div className={`threeDots ${white ? "white" : ""}`}></div>
             </div>
@@ -31,5 +31,14 @@ const ThreedotMenu = ({children, white}) => {
         </div>
     )
 }
+
+export const ThreedotItem = ({onClick, children}) => {
+    return (
+        <div className="threeDotItem" onClick={onClick}>
+            {children}
+        </div>
+    )
+}
+
 
 export default ThreedotMenu

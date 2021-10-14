@@ -1,5 +1,7 @@
 export const initialState = {
-  user: {},
+  user: {
+    userName: "hello"
+  },
   searchQuery: "",
   senderUser: {
     userName: "vipin",

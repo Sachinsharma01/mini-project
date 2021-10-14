@@ -1,17 +1,11 @@
 import React from 'react'
 import UserIcon from '../UserIcon'
-import {useAppContext} from "../../base/context"
 import "./ContactCard.css"
 import { IoCloseCircle } from 'react-icons/io5'
 import { BiBlock } from 'react-icons/bi'
 import { MdDeleteOutline } from 'react-icons/md'
 
-
-
-
-const ContactCard = ({setShowContactCard}) => {
-    const [{senderUser}] = useAppContext();
-
+const ContactCard = ({setShowContactCard, senderUser}) => {
     return (
         <div className="contactCard">
             <div onClick={() => setShowContactCard(false)}><IoCloseCircle className="closeButton" /></div>

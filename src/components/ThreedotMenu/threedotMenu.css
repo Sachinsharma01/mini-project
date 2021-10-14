@@ -49,8 +49,20 @@
 
 .threeDotsMenu {
     position: absolute;
+    bottom: -3em;
+    min-width: 10rem;
     display: inline-block;
     background-color: var(--light-blue);
     border-radius: 10px;
     box-shadow: var(--blue-shadow);
+}
+
+.threeDotItem {
+    font-size: 1.15rem;
+    padding: 15px 25px; 
+    transition: 0.5s;
+}
+
+.threeDotItem:hover {
+    background-color: rgb(191, 219, 255);
 }
