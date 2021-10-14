@@ -4,16 +4,9 @@ import "./MessageCard.css"
 const MessageCard = ({children, me, sender}) => {
     return (
         <div style={{position: "relative"}}>
-            {sender && (
-                <div className="message__sender">
+                <div className={ sender ? "message__sender" : "message__me" }>
                     {children}
                 </div>
-            )}
-            {me && (
-                <div className="message__me">
-                    {children}
-                </div>
-            )}
         </div>
     )
 }

@@ -1,8 +1,10 @@
 export const initialState = {
   user: {},
-  showContactCard: false,
   searchQuery: "",
-  senderUser: {}
+  senderUser: {
+    userName: "vipin",
+    available: true
+  }
 }
 
 const reducer = (state, action) => {
