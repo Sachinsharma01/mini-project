@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(250, 253, 255);
-    border: #fb641b solid 5px;
+    border: var(--orange) solid 5px;
     justify-content: center;
     align-items: center;
     max-height: fit-content;
@@ -55,20 +55,20 @@ label{
     height: 50px;
     font-size: 15px;
     margin: 7% 0%;
-    background-color: #fb641b;
+    background-color: var(--orange);
     border: none;
     color: white;
 }
 .button.google{
     background-color: white;
-    color: blue;
+    color: var(--blue);
     font-weight: 700;
     border: solid rgb(189, 187, 187, 0.4) 1px;
     box-shadow: rgb(189, 187, 187) 1px 1px 3px;
 }
 .hoverbtn:hover{
     border-radius: 8px;
-    background-color: blue;
+    background-color: var(--blue);
     color: white;
     box-shadow: rgb(41, 59, 97) 0px 0px 20px;
 }
@@ -82,7 +82,7 @@ p{
     padding: auto;
 }
 .side{
-    background-color: rgb(40, 115, 240);
+    background-color: var(--blue);
     width: 12rem;
     padding: 0.5% 3%;
     height:max-content;
