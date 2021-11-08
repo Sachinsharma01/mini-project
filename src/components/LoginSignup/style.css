@@ -1,0 +1,140 @@
+.contain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: max-content;
+    padding: 1%;
+    width: inherit;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(250, 253, 255);
+    border: #fb641b solid 5px;
+    justify-content: center;
+    align-items: center;
+    max-height: fit-content;
+    padding: 2% 1%;
+    width: 23rem;
+    border-radius: 10%;
+    box-shadow: grey 0px 0px 8px;
+    padding: 10% 3%;
+}
+form{
+    width:100%;
+}
+.inp{
+    width: 95%;
+    height: 2rem;
+    padding: 1% 1%;
+    font-size: 20px;
+    display: inline-block;
+    margin: 5% 0%;
+    border: none;
+    background-color:transparent;
+    border-bottom: solid rgba(14, 12, 12, 0.3) 1px;
+   
+}
+.inp::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+   
+  }
+  
+.inp:focus{
+    outline: none;
+    /* box-shadow: rgb(121, 210, 245) 0px 0px 10px;          */
+}
+label{
+    font-size: 25px;
+    font-weight: 800;
+
+}
+.button{
+    display: block;
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    margin: 7% 0%;
+    background-color: #fb641b;
+    border: none;
+    color: white;
+}
+.button.google{
+    background-color: white;
+    color: blue;
+    font-weight: 700;
+    border: solid rgb(189, 187, 187, 0.4) 1px;
+    box-shadow: rgb(189, 187, 187) 1px 1px 3px;
+}
+.hoverbtn:hover{
+    border-radius: 8px;
+    background-color: blue;
+    color: white;
+    box-shadow: rgb(41, 59, 97) 0px 0px 20px;
+}
+
+p{
+    border-bottom: grey solid 1px;
+    width: 100%;
+    margin: 30px 0px 30px 0px;
+    text-align: center;
+    font-size: 15px;
+    padding: auto;
+}
+.side{
+    background-color: rgb(40, 115, 240);
+    width: 12rem;
+    padding: 0.5% 3%;
+    height:max-content;
+    border-radius: 10% 0% 0% 10%;
+}
+p.text{
+    border: none;
+    color: white;
+    font-size: 23px;
+}
+.errorList{
+    list-style: none;
+    display: none;
+}
+.listName{
+    display: inline-block;
+}
+.enab{
+    display: inline;
+}
+.green{
+    color: green;
+}
+.btndiv{
+    height: 100px;
+}
+.change{
+    padding: 5% 2%;
+    font-size: 20px;
+    background-color: transparent;
+    border:solid rgb(9, 24, 87,.2) 1px;
+    color: white;
+    box-shadow: rgb(9, 24, 87) 4px 4px 10px;
+    
+}
+.change:active{
+    box-shadow: none;
+    padding: 4.8% 1.5% ;
+    font-size: 18px;
+    
+}
+.change:active ~ .change.login{
+    right:0px
+}
+.change:active ~ .container{
+    animation: togContain 1s linear 1;
+}
+img{
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+
+
