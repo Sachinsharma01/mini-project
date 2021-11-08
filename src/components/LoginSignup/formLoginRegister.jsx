@@ -9,7 +9,7 @@ const LoginRegister=()=>{
         <div className='contain'>
             <div className='side'>
             <p className='text'>Experience the best connections with your friends and family.</p>
-            <img src="./photo/mini.JPG" alt="" />
+            <img src="./mini.JPG" alt="" />
             <div className='btndiv'>
             <button className='change' onClick={()=>{
                 if(slide){
