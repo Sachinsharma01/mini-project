@@ -1,9 +1,11 @@
 import App from './components/App'
 
-
 function Root() {
-  return <><App />
-  </>
+  return (
+    <>
+      <App />
+    </>
+  )
 }
 
 export default Root
