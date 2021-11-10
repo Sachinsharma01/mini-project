@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import React from "react";
 import * as yup from 'yup';
 import Input from "./Input";
-import './style.css'
+import './Authentication.css'
 const validation = yup.object().shape({
     email:yup.string().required().email(),
     password:yup.string().required().min(8)
