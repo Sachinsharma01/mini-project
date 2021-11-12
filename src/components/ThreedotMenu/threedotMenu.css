@@ -1,0 +1,70 @@
+@import url(../../base/main.css);
+
+.threeDotsDiv {
+  position: relative;
+  height: 1.15em;
+  width: 0.5em;
+}
+
+.threeDots.white {
+  background-color: white;
+}
+
+.threeDots.white::before {
+  background-color: white;
+}
+
+.threeDots.white::after {
+  background-color: white;
+}
+
+.threeDots {
+  position: relative;
+  background-color: var(--blue);
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+}
+
+.threeDots::before {
+  position: absolute;
+  content: '';
+  top: 7px;
+  background-color: var(--blue);
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+}
+
+.threeDots::after {
+  position: absolute;
+  content: '';
+  top: 14px;
+  background-color: var(--blue);
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+}
+
+.threeDotsMenu {
+  position: absolute;
+  top: 2em;
+  min-width: 10rem;
+  display: inline-flex;
+  flex-direction: column;
+  background-color: var(--light-blue);
+  border-radius: 10px;
+  box-shadow: var(--blue-shadow);
+  padding: 0;
+}
+
+.threeDotItem {
+  min-width: 10rem;
+  font-size: 1rem;
+  padding: 10px 15px;
+  transition: 0.5s;
+}
+
+.threeDotItem:hover {
+  background-color: rgb(191, 219, 255);
+}

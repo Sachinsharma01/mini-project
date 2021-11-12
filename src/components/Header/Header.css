@@ -1,0 +1,56 @@
+@import url('../../base/main.css');
+
+.header {
+  box-shadow: var(--blue-shadow);
+  background-color: var(--blue);
+  display: flex;
+  align-items: center;
+  padding-right: 15em;
+}
+
+.header__currentUser,
+.header__senderUser {
+  padding: 0.35rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  background-color: var(--light-blue);
+}
+
+.header__senderUser {
+  flex-grow: 50;
+  background-color: var(--blue);
+}
+
+.currentUser__availability {
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.currentUser__availability h2 {
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.currentUser__availability select {
+  padding: 5px 20px;
+  border: none;
+  outline: none;
+  background-color: var(--blue);
+  font-size: 0.75rem;
+  color: var(--light-blue);
+}
+
+.header__currentUser div,
+.header__senderUser div {
+  display: flex;
+  align-items: center;
+}
+
+.header__senderUser div h2 {
+  margin-left: 20px;
+  text-transform: capitalize;
+  color: white;
+}
