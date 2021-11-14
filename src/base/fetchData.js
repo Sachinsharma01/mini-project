@@ -3,7 +3,15 @@ import { db } from './firebase'
 export const fetchRelations = (user, setRelations) => {
   db.collection('users')
     .doc(user.uid)
-    .onSnapshot((snapshot) => setRelations(snapshot.data().relations))
+    .onSnapshot((snapshot) => {
+      snapshot.data().relations.forEach((rel) => {
+        db.collection('users')
+          .doc(rel)
+          .onSnapshot((snap) => {
+            setRelations((data) => [...data, snap.data()])
+          })
+      })
+    })
 }
 
 export const fetchMessages = (user, sender, setMessages) => {
