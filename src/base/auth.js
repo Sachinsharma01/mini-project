@@ -1,18 +1,13 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-} from 'firebase/auth'
+import { auth, provider } from './firebase'
 import { useHistory } from 'react-router-dom'
-import { useAppContext } from './context'
 
 const history = useHistory()
 const auth = getAuth()
 const [{}, dispatch] = useAppContext()
 
 export const signupWithEmail = () => {
-  createUserWithEmailAndPassword(auth, email, password)
+  auth
+    .createUserWithEmailAndPassword(email, password)
     .then(() => {
       sendEmailVerification()
       signOut()
@@ -23,8 +18,9 @@ export const signupWithEmail = () => {
     })
 }
 
-export const loginWithEmail = () => {
-  signInWithEmailAndPassword(auth, email, password)
+export const loginWithEmail = (dispatch) => {
+  auth
+    .signInWithEmailAndPassword(email, password)
     .then((user) => {
       if (!user.emailVerified) {
         signOut()
@@ -41,18 +37,14 @@ export const loginWithEmail = () => {
     })
 }
 
-export const loginWithGoogle = () => {
-  getRedirectResult(auth)
+export const loginWithGoogle = (setUser) => {
+  auth
+    .signInWithRedirect(provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access Google APIs.
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
-
-      // The signed-in user info.
-      const user = result.user
-      dispatch({
+      var user = result.user
+      setUser({
         type: 'SET_USER',
-        payload: user,
+        action: user,
       })
     })
     .catch((error) => {

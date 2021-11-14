@@ -20,9 +20,9 @@ const Header = () => {
     <div className='header'>
       <div className='header__currentUser'>
         <div style={{ marginRight: '10em' }}>
-          <UserIcon src={user.profile_pic} online={user.available} />
+          <UserIcon src={user?.profile_pic} online={user?.available} />
           <div className='currentUser__availability'>
-            <h2>{user.userName}</h2>
+            <h2>{user?.userName}</h2>
             <select onChange={(e) => handleChange(e)}>
               <option value={1} style={{ backgroundColor: 'green' }}>
                 Online
@@ -42,10 +42,10 @@ const Header = () => {
       <div className='header__senderUser'>
         <div>
           <UserIcon
-            src={senderUser.profile_pic}
-            online={senderUser.available}
+            src={senderUser?.profile_pic}
+            online={senderUser?.available}
           />
-          <h2>{senderUser.userName}</h2>
+          <h2>{senderUser?.userName}</h2>
         </div>
       </div>
       <ThreedotMenu white>
