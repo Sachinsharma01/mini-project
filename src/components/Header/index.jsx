@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserIcon from '../UserIcon'
 import ContactCard from '../ContactCard'
 import ThreedotMenu, { ThreedotItem } from '../ThreedotMenu'
@@ -11,6 +11,15 @@ const Header = () => {
   const [showLogin, setShowLogin] = useState(false)
   const [signup, setSignup] = useState()
   const [{ user, senderUser }, dispatch] = useAppContext()
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      dispatch({
+        type: 'SET_USER',
+        payload: JSON.parse(localStorage.getItem('user')),
+      })
+    }
+  }, [])
 
   const handleChange = (e) => {
     dispatch({
