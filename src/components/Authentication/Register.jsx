@@ -27,7 +27,13 @@ function Register() {
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={validation}
         onSubmit={(values) => {
-          signupWithEmail(dispatch, values.email, values.password)
+          signupWithEmail(
+            dispatch,
+            values.firstName,
+            values.lastName,
+            values.email,
+            values.password
+          )
         }}
       >
         {({

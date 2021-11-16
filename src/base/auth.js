@@ -1,6 +1,13 @@
-import { auth, googleAuth } from './firebase'
+import { auth, googleAuth, db } from './firebase'
+import { pushNewUser, pushGoogleUser } from './pushData'
 
-export const signupWithEmail = (dispatch, email, password) => {
+export const signupWithEmail = (
+  dispatch,
+  firstname,
+  lastname,
+  email,
+  password
+) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((user) => {
@@ -8,11 +15,7 @@ export const signupWithEmail = (dispatch, email, password) => {
       // // window.location = '/verifyemail'
       // // auth.sendEmailVerification()
       // auth.signOut()
-      localStorage.setItem('user', JSON.stringify(result))
-      dispatch({
-        type: 'SET_USER',
-        payload: result,
-      })
+      pushNewUser(result.uid, firstname, lastname, email, dispatch)
     })
     .catch((error) => {
       console.log(error)
@@ -22,34 +25,31 @@ export const signupWithEmail = (dispatch, email, password) => {
 export const loginWithEmail = (dispatch, email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      var result = user.user
-      // if (user.emailVerified) {
-      //   auth.signOut()
-      //   window.location = '/verifyemail'
-      // } else {
-      localStorage.setItem('user', JSON.stringify(result))
-      dispatch({
-        type: 'SET_USER',
-        payload: result,
-      })
-      // }
+    .then((result) => {
+      var user = result.user
+      db.collection('users')
+        .doc(user.uid)
+        .onSnapshot((snapshot) => {
+          localStorage.setItem('user', JSON.stringify(snapshot.data()))
+          dispatch({
+            type: 'SET_USER',
+            payload: snapshot.data(),
+          })
+          localStorage.removeItem('authUser')
+        })
     })
     .catch((error) => {
       console.log(error)
     })
 }
 
-export const loginWithGoogle = (setUser) => {
+export const loginWithGoogle = (dispatch) => {
   auth
     .signInWithPopup(googleAuth)
     .then((result) => {
       var user = result.user
-      localStorage.setItem('user', JSON.stringify(user))
-      setUser({
-        type: 'SET_USER',
-        payload: user,
-      })
+      localStorage.setItem('authUser', JSON.stringify(user))
+      pushGoogleUser(dispatch)
     })
     .catch((error) => {
       console.log(error)

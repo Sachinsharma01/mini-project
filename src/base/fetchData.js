@@ -8,7 +8,10 @@ export const fetchRelations = (user, setRelations) => {
         db.collection('users')
           .doc(rel)
           .onSnapshot((snap) => {
-            setRelations((data) => [...data, snap.data()])
+            setRelations({
+              type: 'SET_RELATION',
+              payload: snap.data(),
+            })
           })
       })
     })
