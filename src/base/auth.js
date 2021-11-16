@@ -1,36 +1,39 @@
-import { auth, provider } from './firebase'
-import { useHistory } from 'react-router-dom'
+import { auth, googleAuth } from './firebase'
 
-const history = useHistory()
-const auth = getAuth()
-const [{}, dispatch] = useAppContext()
-
-export const signupWithEmail = () => {
+export const signupWithEmail = (dispatch, email, password) => {
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      sendEmailVerification()
-      signOut()
-      history.push('/verifyemail')
+    .then((user) => {
+      var result = user.user
+      // // window.location = '/verifyemail'
+      // // auth.sendEmailVerification()
+      // auth.signOut()
+      localStorage.setItem('user', JSON.stringify(result))
+      dispatch({
+        type: 'SET_USER',
+        payload: result,
+      })
     })
     .catch((error) => {
       console.log(error)
     })
 }
 
-export const loginWithEmail = (dispatch) => {
+export const loginWithEmail = (dispatch, email, password) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((user) => {
-      if (!user.emailVerified) {
-        signOut()
-        history.push('/verifyemail')
-      } else {
-        dispatch({
-          type: 'SET_USER',
-          payload: user,
-        })
-      }
+      var result = user.user
+      // if (user.emailVerified) {
+      //   auth.signOut()
+      //   window.location = '/verifyemail'
+      // } else {
+      localStorage.setItem('user', JSON.stringify(result))
+      dispatch({
+        type: 'SET_USER',
+        payload: result,
+      })
+      // }
     })
     .catch((error) => {
       console.log(error)
@@ -39,12 +42,13 @@ export const loginWithEmail = (dispatch) => {
 
 export const loginWithGoogle = (setUser) => {
   auth
-    .signInWithRedirect(provider)
+    .signInWithPopup(googleAuth)
     .then((result) => {
       var user = result.user
+      localStorage.setItem('user', JSON.stringify(user))
       setUser({
         type: 'SET_USER',
-        action: user,
+        payload: user,
       })
     })
     .catch((error) => {
