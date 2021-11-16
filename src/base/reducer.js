@@ -1,42 +1,49 @@
 export const initialState = {
-  user: {
-    userName: "hello",
-    available: true
-  },
-  searchQuery: "",
-  senderUser: {
-    userName: "vipin",
-    available: true
-  }
+  user: null,
+  searchQuery: '',
+  senderUser: null,
+  messages: [],
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_USER": 
-    return {
-      ...state,
-      user: action.payload
-    }
-    case "SET_USER_AVAILABLE":
+    case 'SET_USER':
+      return {
+        ...state,
+        user: action.payload,
+      }
+    case 'SET_USER_AVAILABLE':
       return {
         ...state,
         user: {
-          ...state.user, available: action.payload
-        }
+          ...state.user,
+          available: action.payload,
+        },
       }
-      case "SET_SEARCH":
-        return {
-          ...state,
-          searchQuery: action.payload
-        }
-      case "SET_SENDER":
-        return {
-          ...state,
-          senderUser: action.payload
-        }
-      default:
-        return state
+    case 'SET_SEARCH':
+      return {
+        ...state,
+        searchQuery: action.payload,
+      }
+    case 'SET_SENDER':
+      return {
+        ...state,
+        senderUser: action.payload,
+      }
+    case 'SET_MESSAGES':
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          {
+            id: action.payload.id,
+            msg: action.payload.data,
+          },
+        ],
+      }
+    default:
+      return state
   }
 }
 
-export default reducer;
+export default reducer
