@@ -1,1 +1,6 @@
 @import url("../../base/main.css");
+.relations {
+    background: var(--light-blue);
+    display: flex;
+    flex-direction: column;
+}

@@ -1,1 +1,47 @@
 @import url("../../../base/main.css");
+@import url("../../UserIcon/UserIcon.css");
+
+.container {
+  /* background: none; */
+  position: relative;
+  left: 20px;
+  top: 15px;
+  height: 74px;
+  width: 325px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray);
+  margin-top: 0.5rem;
+}
+.active {
+  background-color: var(--blue);
+  color: white;
+}
+.inner__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inner__user__icon {
+  margin-left: 1rem;
+}
+.user__details {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  font-weight: bold;
+}
+.user__details p {
+  margin-top: 2px;
+  font-weight: normal;
+}
+.time_stamp {
+  margin-right: 1rem;
+}
