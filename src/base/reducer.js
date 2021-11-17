@@ -34,7 +34,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         messages: [
-          ...state.messages,
+          
           {
             id: action.payload.id,
             msg: action.payload.data,
