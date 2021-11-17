@@ -1,24 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.css";
 import SidebarContact from "./SideBarContact";
-import { fetchMessages, fetchRelations } from "../.././base/fetchData";
+import { fetchRelations } from "../.././base/fetchData";
+import { useAppContext } from "../../base/context";
 
 const Sidebar = () => {
-  const dummyRelations = fetchRelations();
-  //   console.log(dummyRelations);
-  const messages = fetchMessages();
-
+  const [{ user, relations }, dispatch] = useAppContext();
+  useEffect(() => {
+    fetchRelations(user, dispatch);
+  }, []);
+  console.log(relations);
   return (
     <div className="relations">
-      {dummyRelations.map((relation) => (
-        <SidebarContact
-          key={relation}
-          name={relation}
-          message="hello there!!"
-          timeStamp="2:56"
-        />
+      {relations?.map((relation, index) => (
+        <li>
+          <Sidebar
+            key={index}
+            name={relation?.first_name}
+            message="hello there!!"
+            timestamp="2:56"
+          />
+        </li>
       ))}
     </div>
+    // <div className="relations">
+    //   {relations?.map((relation, index) => (
+    //     <SidebarContact
+    //       key={index}
+    //       name={relation?.first_name}
+    //       message="hello there!!"
+    //       timeStamp="2:56"
+    //     />
+    //   ))}
+    // </div>
   );
 };
 

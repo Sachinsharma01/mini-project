@@ -1,9 +1,12 @@
 export const initialState = {
-  user: null,
-  searchQuery: '',
+  user: {
+    uid: "tsb2OW34L8hiGRP2I56HcKSpQP92",
+  },
+  searchQuery: "",
   senderUser: null,
   messages: [],
-}
+  relations: [],
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +32,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         senderUser: action.payload,
+      }
+    case "SET_RELATION": 
+      return {
+        ...state,
+        relations: [...state.relations, action.payload]
       }
     case 'SET_MESSAGES':
       return {
