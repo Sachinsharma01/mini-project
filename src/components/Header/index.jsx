@@ -84,7 +84,7 @@ const Header = () => {
             </h2>
           </div>
         )}
-        {user && (
+        {user && senderUser && (
           <>
             <div>
               <UserIcon

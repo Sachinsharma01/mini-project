@@ -17,6 +17,17 @@ export const fetchRelations = (user, setRelations) => {
     });
 };
 
+export const fetchUser = (uid, dispatch) => {
+  db.collection('users')
+    .doc(uid)
+    .onSnapshot((snap) =>
+      dispatch({
+        type: 'SET_USER',
+        payload: snap.data(),
+      })
+    )
+}
+
 export const fetchMessages = (user, sender, setMessages) => {
   db.collection("chats")
     .doc(user.localeCompare(sender) === -1 ? user : sender)

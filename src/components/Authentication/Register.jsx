@@ -115,7 +115,6 @@ function Register() {
                   length atleast of 8 Characters
                 </li>
               </ul>
-              {console.log(errors)}
               <button
                 className={'button hoverbtn'}
                 type='submit'
