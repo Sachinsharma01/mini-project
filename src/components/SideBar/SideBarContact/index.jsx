@@ -2,13 +2,18 @@ import React, { useState } from "react";
 import UserIcon from "../../UserIcon";
 import "./SideBarContact.css";
 import { useAppContext } from "../../../base/context";
+import { fetchUser } from "../../../base/fetchData";
 
-const SidebarContact = ({ name, message, timeStamp }) => {
+const SidebarContact = ({ uid,  name, message, timeStamp }) => {
   const [activeUser, setActiveUser] = useState(false);
+    // const [{ uid }, dispatchUser] = useAppContext();
+
+  
+  const [{ user, senderUser }, dispatch] = useAppContext();
   const activeUserHandler = () => {
     setActiveUser(true);
+    fetchUser(uid, dispatch);
   };
-  const [{ user, senderUser }, dispatch] = useAppContext();
 
   const active = activeUser ? "active": "";
   return (
@@ -26,7 +31,7 @@ const SidebarContact = ({ name, message, timeStamp }) => {
     >
       <div style={{ width: "100%", display: "flex", marginTop: "10px" }}>
         <div style={{ marginLeft: "10px" }}>
-          <UserIcon src={user.profile_pic} online={user.available} />
+          <UserIcon src={user?.profile_pic} online={true} />
         </div>
         <div
           style={{

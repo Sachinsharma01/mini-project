@@ -15,6 +15,7 @@ const Sidebar = () => {
       {relations?.map((relation, index) => (
           <SidebarContact
             key={index}
+            uid={relation?.uid}
             name={relation?.first_name}
             message="hello there!!"
             timestamp="2:56"
