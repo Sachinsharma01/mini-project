@@ -13,14 +13,12 @@ const Sidebar = () => {
   return (
     <div className="relations">
       {relations?.map((relation, index) => (
-        <li>
-          <Sidebar
+          <SidebarContact
             key={index}
             name={relation?.first_name}
             message="hello there!!"
             timestamp="2:56"
           />
-        </li>
       ))}
     </div>
     // <div className="relations">

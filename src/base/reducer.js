@@ -6,7 +6,7 @@ export const initialState = {
   senderUser: null,
   messages: [],
   relations: [],
-};
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,6 +28,11 @@ const reducer = (state, action) => {
         ...state,
         searchQuery: action.payload,
       }
+    case 'SET_RELATION':
+      return {
+        ...state,
+        relations: [...state.relations, action.payload],
+      }
     case 'SET_SENDER':
       return {
         ...state,
@@ -42,7 +47,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         messages: [
-          ...state.messages,
           {
             id: action.payload.id,
             msg: action.payload.data,

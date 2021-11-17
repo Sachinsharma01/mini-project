@@ -10,18 +10,39 @@ const SidebarContact = ({ name, message, timeStamp }) => {
   };
   const [{ user, senderUser }, dispatch] = useAppContext();
 
-  const active = activeUser ? "container" + " active" : "container";
+  const active = activeUser ? "active": "";
   return (
-    <div className={active} onClick={activeUserHandler}>
-      <div className="inner__container">
-        <div className="inner__user__icon">
+    <div
+      style={{
+        height: "100px",
+        width: "100%",
+        display: "flex",
+        marginTop: "10px",
+        marginLeft: "10px",
+        borderRadius: "10px"
+      }}
+      className={active}
+      onClick={activeUserHandler}
+    >
+      <div style={{ width: "100%", display: "flex", marginTop: "10px" }}>
+        <div style={{ marginLeft: "10px" }}>
           <UserIcon src={user.profile_pic} online={user.available} />
         </div>
-        <div className="user__details">
+        <div
+          style={{
+            marginLeft: "10px",
+            display: "flex",
+            flexDirection: "column",
+            fontWeight: "bold",
+            color: activeUser ? "black" : "grey"
+          }}
+        >
           {name}
-          <p>{message.substring(0, 20) + " ..."}</p>
+          <p style={{ fontWeight: "normal" }}>
+            {message.substring(0, 20) + " ..."}
+          </p>
         </div>
-        <div className="time_stamp">{timeStamp}</div>
+        <div>{timeStamp}</div>
       </div>
     </div>
   );

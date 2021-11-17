@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserIcon from '../UserIcon'
 import ContactCard from '../ContactCard'
 import ThreedotMenu, { ThreedotItem } from '../ThreedotMenu'
@@ -11,6 +11,15 @@ const Header = () => {
   const [showLogin, setShowLogin] = useState(false)
   const [signup, setSignup] = useState()
   const [{ user, senderUser }, dispatch] = useAppContext()
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      dispatch({
+        type: 'SET_USER',
+        payload: JSON.parse(localStorage.getItem('user')),
+      })
+    }
+  }, [])
 
   const handleChange = (e) => {
     dispatch({
@@ -27,7 +36,7 @@ const Header = () => {
             <div style={{ marginRight: '10em' }}>
               <UserIcon src={user?.profile_pic} online={user?.available} />
               <div className='currentUser__availability'>
-                <h2>{user?.userName}</h2>
+                <h2>{user?.user_name}</h2>
                 <select onChange={(e) => handleChange(e)}>
                   <option value={1} style={{ backgroundColor: 'green' }}>
                     Online
@@ -87,7 +96,7 @@ const Header = () => {
           </>
         )}
       </div>
-      {showLogin && <Auth state={signup} />}
+      {!user && showLogin && <Auth state={signup} />}
       {user && (
         <>
           <ThreedotMenu white>
