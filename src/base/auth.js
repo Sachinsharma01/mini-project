@@ -1,56 +1,52 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-} from 'firebase/auth'
-import { useHistory } from 'react-router-dom'
-import { useAppContext } from './context'
+import { auth, googleAuth } from './firebase'
 
-const history = useHistory()
-const auth = getAuth()
-const [{}, dispatch] = useAppContext()
-
-export const signupWithEmail = () => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      sendEmailVerification()
-      signOut()
-      history.push('/verifyemail')
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
-export const loginWithEmail = () => {
-  signInWithEmailAndPassword(auth, email, password)
+export const signupWithEmail = (dispatch, email, password) => {
+  auth
+    .createUserWithEmailAndPassword(email, password)
     .then((user) => {
-      if (!user.emailVerified) {
-        signOut()
-        history.push('/verifyemail')
-      } else {
-        dispatch({
-          type: 'SET_USER',
-          payload: user,
-        })
-      }
+      var result = user.user
+      // // window.location = '/verifyemail'
+      // // auth.sendEmailVerification()
+      // auth.signOut()
+      localStorage.setItem('user', JSON.stringify(result))
+      dispatch({
+        type: 'SET_USER',
+        payload: result,
+      })
     })
     .catch((error) => {
       console.log(error)
     })
 }
 
-export const loginWithGoogle = () => {
-  getRedirectResult(auth)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access Google APIs.
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
-
-      // The signed-in user info.
-      const user = result.user
+export const loginWithEmail = (dispatch, email, password) => {
+  auth
+    .signInWithEmailAndPassword(email, password)
+    .then((user) => {
+      var result = user.user
+      // if (user.emailVerified) {
+      //   auth.signOut()
+      //   window.location = '/verifyemail'
+      // } else {
+      localStorage.setItem('user', JSON.stringify(result))
       dispatch({
+        type: 'SET_USER',
+        payload: result,
+      })
+      // }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+export const loginWithGoogle = (setUser) => {
+  auth
+    .signInWithPopup(googleAuth)
+    .then((result) => {
+      var user = result.user
+      localStorage.setItem('user', JSON.stringify(user))
+      setUser({
         type: 'SET_USER',
         payload: user,
       })

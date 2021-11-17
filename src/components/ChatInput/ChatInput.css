@@ -1,7 +1,36 @@
 .input {
     background-color: var(--blue);
-    position: relative;
-    top: 50px;
-    left: 50px;
+    width: 100%;
+    position: fixed;
+    right: 0;
+    bottom: 10%;
+}
+.input input, button {
+    position: inherit;
+    right: 0;
+    margin: 20px;
+}
+.input input {
+    width: 90%;
+    font-size: 15px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    /* height: 20px; */
+    padding: 10px;
     
+
+}
+.sendIcon{
+    font-size: 15px;
+}
+.input button {
+    border: none;
+    border-radius: 10px;
+    background: var(--blue);
+    color: white;
+    width: 100px;
+    text-transform: capitalize;
+    padding: 11px;
+    font-weight: bold;
+    font-size: 15px;
 }
