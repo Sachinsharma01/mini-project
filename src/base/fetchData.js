@@ -28,16 +28,29 @@ export const fetchUser = (uid, dispatch) => {
     )
 }
 
+/*
+const [{ messages, user, senderUser }, dispatch] = useAppContext()
+  useEffect(() => {
+    const userId = user?.uid.toString()
+    const senderId = senderUser?.uid.toString()
+    // console.log(typeof userId)
+    fetchMessages(userId, senderId, dispatch)
+  }, [])
+
+  console.log(messages)
+*/
+
 export const fetchMessages = (user, sender, setMessages) => {
   db.collection('chats')
-    .doc(user.localeCompare(sender) === -1 ? user : sender)
-    .collection(user.localeCompare(sender) === 1 ? user : sender)
-    .onSnapshot((data) => {
-      data.docs.map((doc) => {
+    .doc(sender)
+    .collection(user)
+    .onSnapshot((r) =>
+      r.docs.map((t) => {
+        console.log(t.data())
         setMessages({
           type: 'SET_MESSAGES',
-          payload: { id: user, data: doc.data() },
+          payload: { id: user, data: t.data() },
         })
       })
-    })
+    )
 }
