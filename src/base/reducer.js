@@ -36,6 +36,11 @@ const reducer = (state, action) => {
         ...state,
         senderUser: action.payload,
       }
+    case 'SET_RELATION':
+      return {
+        ...state,
+        relations: [...state.relations, action.payload],
+      }
     case 'SET_MESSAGES':
       return {
         ...state,

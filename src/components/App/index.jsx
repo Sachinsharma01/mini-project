@@ -1,18 +1,20 @@
 import React from 'react'
+import { useAppContext } from '../../base/context'
 import Header from '../Header'
 import Main from '../Main'
 import Sidebar from '../SideBar'
 
 const App = () => {
-    return (
-        <>
-        <Header />
-        <div>
-            <Sidebar />
-            <Main />
-        </div>
-        </>
-    )
+  const [{ user }] = useAppContext()
+  return (
+    <>
+      <Header />
+      <div>
+        {user && <Sidebar />}
+        <Main />
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
