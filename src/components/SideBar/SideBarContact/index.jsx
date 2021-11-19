@@ -17,8 +17,6 @@ const SidebarContact = ({ uid, name, message, timeStamp, sender }) => {
     })
   }
 
-  console.log(sender)
-
   const active = activeUser ? 'active' : ''
   return (
     <div

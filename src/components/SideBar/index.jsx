@@ -9,7 +9,6 @@ const Sidebar = () => {
   useEffect(() => {
     fetchRelations(user, dispatch)
   }, [])
-  console.log(relations)
   return (
     <div className='relations'>
       {relations?.map((relation, index) => (

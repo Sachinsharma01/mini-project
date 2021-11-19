@@ -1,6 +1,5 @@
-@import url("../../base/main.css");
+@import url('../../base/main.css');
 .main {
-    width: 100%;
-    background-color: white;
-    height: inherit;
+  background-color: white;
+  height: inherit;
 }

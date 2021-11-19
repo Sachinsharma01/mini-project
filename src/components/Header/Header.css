@@ -23,12 +23,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   background-color: var(--light-blue);
 }
 
+.header__currentUser {
+  width: 1/4;
+}
+
 .header__senderUser {
-  flex-grow: 50;
+  width: 3/4;
   background-color: var(--blue);
 }
 

@@ -44,12 +44,7 @@ const reducer = (state, action) => {
     case 'SET_MESSAGES':
       return {
         ...state,
-        messages: [
-          {
-            id: action.payload.id,
-            msg: action.payload.data,
-          },
-        ],
+        messages: [action.payload],
       }
     default:
       return state

@@ -44,13 +44,13 @@ export const fetchMessages = (user, sender, setMessages) => {
   db.collection('chats')
     .doc(sender)
     .collection(user)
-    .onSnapshot((r) =>
+    .onSnapshot((r) => {
       r.docs.map((t) => {
-        console.log(t.data())
+        // console.log(t.data())
         setMessages({
           type: 'SET_MESSAGES',
-          payload: { id: user, data: t.data() },
+          payload: t.data(),
         })
       })
-    )
+    })
 }
