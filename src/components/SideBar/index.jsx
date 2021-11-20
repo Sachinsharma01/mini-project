@@ -17,7 +17,6 @@ const Sidebar = () => {
       type: 'SET_SENDER',
       payload: selectedUser,
     })
-    console.log(selectedUser)
   }, [selectedUser, setSelectedUser])
 
   return (

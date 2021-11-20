@@ -17,36 +17,15 @@ export const fetchRelations = (user, setRelations) => {
     })
 }
 
-export const fetchUser = (uid, dispatch) => {
-  db.collection('users')
-    .doc(uid)
-    .onSnapshot((snap) =>
-      dispatch({
-        type: 'SET_USER',
-        payload: snap.data(),
-      })
-    )
-}
-
-/*
-const [{ messages, user, senderUser }, dispatch] = useAppContext()
-  useEffect(() => {
-    const userId = user?.uid.toString()
-    const senderId = senderUser?.uid.toString()
-    // console.log(typeof userId)
-    fetchMessages(userId, senderId, dispatch)
-  }, [])
-
-  console.log(messages)
-*/
-
-export const fetchMessages = (user, sender, setMessages) => {
+export const fetchMessages = (user, sender, setMessages, setNewMsg) => {
   db.collection('chats')
     .doc(sender)
     .collection(user)
+    .orderBy('time', 'asc')
     .onSnapshot((r) => {
+      setNewMsg([])
       r.docs.map((t) => {
-        // console.log(t.data())
+        setNewMsg((prev) => [...prev, t.data()])
         setMessages({
           type: 'SET_MESSAGES',
           payload: t.data(),

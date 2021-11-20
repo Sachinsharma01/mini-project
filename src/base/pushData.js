@@ -1,6 +1,13 @@
 import { db } from './firebase'
+import firebase from 'firebase'
 
-export const pushMessage = () => {}
+export const pushMessage = (msg, time, id1, id2, sender) => {
+  db.collection('chats').doc(id1).collection(id2).add({
+    msg: msg,
+    time: firebase.firestore.Timestamp.now(),
+    sender: sender?.uid,
+  })
+}
 
 export const pushNewUser = (id, firstname, lastname, email, dispatch) => {
   const docData = {

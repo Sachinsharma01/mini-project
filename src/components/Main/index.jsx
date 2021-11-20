@@ -3,42 +3,40 @@ import './Main.css'
 import MessageCard from '../MessageCard'
 import { fetchMessages } from '../../base/fetchData'
 import { useAppContext } from '../../base/context'
+import ChatInput from '../ChatInput'
+import { pushMessage } from '../../base/pushData'
 
 const Main = () => {
-  const [{ messages, user, senderUser }, dispatch] = useAppContext()
+  const [{ user, senderUser }, dispatch] = useAppContext()
   const [newmsg, setnewmsg] = useState([])
 
-  useEffect(() => {
-    const uids = [user?.uid.toString(), senderUser?.uid.toString()]
-    uids.sort()
-    fetchMessages(uids[1], uids[0], dispatch)
-  }, [senderUser])
+  const uids = [user?.uid.toString(), senderUser?.uid.toString()]
+  uids.sort()
 
   useEffect(() => {
-    setnewmsg((prev) => {
-      return [...prev, messages]
-    })
-  }, [messages])
+    fetchMessages(uids[1], uids[0], dispatch, setnewmsg)
+  }, [senderUser])
 
   useEffect(() => {
     setnewmsg([])
   }, [senderUser])
 
+  const handlePushMessage = (msg) => {
+    pushMessage(msg, '', uids[0], uids[1], senderUser)
+  }
+
   return (
     <div className='mainContainer'>
       {newmsg.map((obj) => {
-        if (obj[0]) {
+        if (obj) {
           return (
-            <MessageCard sender={obj[0]?.sender !== user?.uid}>
-              {obj[0]?.msg}
+            <MessageCard sender={obj?.sender !== user?.uid}>
+              {obj?.msg}
             </MessageCard>
           )
         }
       })}
-      <div>
-        <input type='text' placeholder='enter msg' className='mainInput' />
-        <button type='submit'>send</button>
-      </div>
+      <ChatInput handleClick={handlePushMessage} />
     </div>
   )
 }
