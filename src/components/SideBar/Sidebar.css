@@ -1,1 +1,5 @@
-@import url("../../base/main.css");
+@import url('../../base/main.css');
+.relations {
+  margin-top: 5px;
+  background: var(--light-blue);
+}
