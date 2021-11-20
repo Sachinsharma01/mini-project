@@ -9,10 +9,10 @@ const Main = () => {
   const [newmsg, setnewmsg] = useState([])
 
   useEffect(() => {
-    const userId = user?.uid.toString()
-    const senderId = senderUser?.uid.toString()
-    fetchMessages(userId, senderId, dispatch)
-  }, [])
+    const uids = [user?.uid.toString(), senderUser?.uid.toString()]
+    uids.sort()
+    fetchMessages(uids[1], uids[0], dispatch)
+  }, [senderUser])
 
   useEffect(() => {
     setnewmsg((prev) => {
@@ -20,7 +20,9 @@ const Main = () => {
     })
   }, [messages])
 
-  console.log(newmsg)
+  useEffect(() => {
+    setnewmsg([])
+  }, [senderUser])
 
   return (
     <div className='mainContainer'>

@@ -1,23 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserIcon from '../../UserIcon'
 import './SideBarContact.css'
 import { useAppContext } from '../../../base/context'
 import { fetchUser } from '../../../base/fetchData'
 
-const SidebarContact = ({ uid, name, message, timeStamp, sender }) => {
-  const [activeUser, setActiveUser] = useState(false)
-  // const [{ uid }, dispatchUser] = useAppContext();
-
+const SidebarContact = ({
+  active,
+  uid,
+  name,
+  message,
+  timeStamp,
+  sender,
+  setSelected,
+}) => {
   const [{ user, senderUser }, dispatch] = useAppContext()
+
   const activeUserHandler = () => {
-    setActiveUser(true)
-    dispatch({
-      type: 'SET_SENDER',
-      payload: sender,
-    })
+    setSelected(sender)
   }
 
-  const active = activeUser ? 'active' : ''
+  const activeBlue = active && active?.uid === sender?.uid ? 'active' : ''
   return (
     <div
       style={{
@@ -28,7 +30,7 @@ const SidebarContact = ({ uid, name, message, timeStamp, sender }) => {
         marginLeft: '10px',
         borderRadius: '10px',
       }}
-      className={active}
+      className={activeBlue}
       onClick={activeUserHandler}
     >
       <div style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
@@ -41,7 +43,7 @@ const SidebarContact = ({ uid, name, message, timeStamp, sender }) => {
             display: 'flex',
             flexDirection: 'column',
             fontWeight: 'bold',
-            color: activeUser ? 'black' : 'grey',
+            // color: activeUser ? 'black' : 'grey',
           }}
         >
           {name}

@@ -1,7 +1,7 @@
 export const initialState = {
   user: null,
   searchQuery: '',
-  senderUser: { uid: 'B2tQA5gPxkdEEialindnlukh2vc2' },
+  senderUser: null,
   messages: [],
   relations: [],
 }

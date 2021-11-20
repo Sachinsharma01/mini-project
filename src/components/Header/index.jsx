@@ -91,7 +91,9 @@ const Header = () => {
                 src={senderUser?.profile_pic}
                 online={senderUser?.available}
               />
-              <h2>{senderUser?.userName}</h2>
+              <h2>
+                {senderUser?.first_name} {senderUser?.last_name}
+              </h2>
             </div>
           </>
         )}
