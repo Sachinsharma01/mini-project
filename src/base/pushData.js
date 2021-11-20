@@ -1,10 +1,10 @@
 import { db } from './firebase'
 import firebase from 'firebase'
 
-export const pushMessage = (msg, time, id1, id2, sender) => {
+export const pushMessage = (msg, id1, id2, sender) => {
   db.collection('chats').doc(id1).collection(id2).add({
     msg: msg,
-    time: firebase.firestore.Timestamp.now(),
+    time: firebase.firestore.FieldValue.serverTimestamp(),
     sender: sender?.uid,
   })
 }
@@ -45,9 +45,8 @@ export const pushGoogleUser = (dispatch) => {
       } else {
         const docData = {
           uid: user.uid,
-          signup: true,
-          first_name: user.displayName.split()[0],
-          last_name: user.displayName.split()[1]
+          first_name: user.displayName.split(' ')[0],
+          last_name: user.displayName.split(' ')[1]
             ? user.displayName.split()[0]
             : '',
           relations: [],
@@ -67,8 +66,20 @@ export const pushGoogleUser = (dispatch) => {
         localStorage.removeItem('authUser')
       }
     })
+}
 
-  // console.log('indside else')
+export const pushRelation = (user, sender) => {
+  db.collection('users')
+    .doc(user.uid)
+    .update({
+      relations: firebase.firestore.FieldValue.arrayUnion(sender.uid),
+    })
+
+  db.collection('users')
+    .doc(sender.uid)
+    .update({
+      relations: firebase.firestore.FieldValue.arrayUnion(user.uid),
+    })
 }
 
 export const pushBlockRequest = () => {}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import UserIcon from '../../UserIcon'
 import './SideBarContact.css'
 import { useAppContext } from '../../../base/context'
-import { fetchUser } from '../../../base/fetchData'
 
 const SidebarContact = ({
   active,
@@ -48,7 +47,7 @@ const SidebarContact = ({
         >
           {name}
           <p style={{ fontWeight: 'normal' }}>
-            {message.substring(0, 20) + ' ...'}
+            {message?.substring(0, 20) + ' ...'}
           </p>
         </div>
         <div>{timeStamp}</div>

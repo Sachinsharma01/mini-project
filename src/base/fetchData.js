@@ -5,6 +5,10 @@ export const fetchRelations = (user, setRelations) => {
     .doc(user.uid)
     .onSnapshot((snapshot) => {
       snapshot.data().relations.forEach((rel) => {
+        setRelations({
+          type: 'SET_RELATION',
+          payload: [],
+        })
         db.collection('users')
           .doc(rel)
           .onSnapshot((snap) => {
@@ -32,4 +36,15 @@ export const fetchMessages = (user, sender, setMessages, setNewMsg) => {
         })
       })
     })
+}
+
+export const fetchSearchResults = (searchQuery, setQueryResults) => {
+  db.collection('users').onSnapshot((r) => {
+    setQueryResults([])
+    r.docs.map((t) => {
+      if (t.data().user_name.includes(searchQuery)) {
+        setQueryResults((prev) => [...prev, t.data()])
+      }
+    })
+  })
 }

@@ -1,6 +1,5 @@
 export const initialState = {
   user: null,
-  searchQuery: '',
   senderUser: null,
   messages: [],
   relations: [],
@@ -13,6 +12,11 @@ const reducer = (state, action) => {
         ...state,
         user: action.payload,
       }
+    case 'SET_RELATION':
+      return {
+        ...state,
+        relations: [...state.relations, action.payload],
+      }
     case 'SET_USER_AVAILABLE':
       return {
         ...state,
@@ -21,25 +25,15 @@ const reducer = (state, action) => {
           available: action.payload,
         },
       }
-    case 'SET_SEARCH':
-      return {
-        ...state,
-        searchQuery: action.payload,
-      }
-    case 'SET_RELATION':
-      return {
-        ...state,
-        relations: [...state.relations, action.payload],
-      }
+    // case 'SET_RELATION':
+    //   return {
+    //     ...state,
+    //     relations: [...state.relations, action.payload],
+    //   }
     case 'SET_SENDER':
       return {
         ...state,
         senderUser: action.payload,
-      }
-    case 'SET_RELATION':
-      return {
-        ...state,
-        relations: [...state.relations, action.payload],
       }
     case 'SET_MESSAGES':
       return {

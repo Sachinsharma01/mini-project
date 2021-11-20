@@ -5,6 +5,7 @@ import ThreedotMenu, { ThreedotItem } from '../ThreedotMenu'
 import './Header.css'
 import { useAppContext } from '../../base/context'
 import Auth from '../Authentication'
+import { auth } from '../../base/firebase'
 
 const Header = () => {
   const [showContactCard, setShowContactCard] = useState(false)
@@ -50,7 +51,15 @@ const Header = () => {
             <ThreedotMenu>
               <ThreedotItem onClick={() => {}}>Profile</ThreedotItem>
               <ThreedotItem onClick={() => {}}>Settings</ThreedotItem>
-              <ThreedotItem onClick={() => {}}>Logout</ThreedotItem>
+              <ThreedotItem
+                onClick={() => {
+                  auth.signOut()
+                  localStorage.removeItem('user')
+                  window.location.reload()
+                }}
+              >
+                Logout
+              </ThreedotItem>
             </ThreedotMenu>
           </div>
         </>
@@ -99,7 +108,7 @@ const Header = () => {
         )}
       </div>
       {!user && showLogin && <Auth state={signup} />}
-      {user && (
+      {senderUser && (
         <>
           <ThreedotMenu white>
             <ThreedotItem

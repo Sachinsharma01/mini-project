@@ -4,9 +4,9 @@ import MessageCard from '../MessageCard'
 import { fetchMessages } from '../../base/fetchData'
 import { useAppContext } from '../../base/context'
 import ChatInput from '../ChatInput'
-import { pushMessage } from '../../base/pushData'
+import { pushMessage, pushRelation } from '../../base/pushData'
 
-const Main = () => {
+const Main = ({ searchNew }) => {
   const [{ user, senderUser }, dispatch] = useAppContext()
   const [newmsg, setnewmsg] = useState([])
 
@@ -22,7 +22,10 @@ const Main = () => {
   }, [senderUser])
 
   const handlePushMessage = (msg) => {
-    pushMessage(msg, '', uids[0], uids[1], senderUser)
+    if (searchNew) {
+      pushRelation(user, senderUser)
+    }
+    pushMessage(msg, uids[0], uids[1], senderUser)
   }
 
   return (
