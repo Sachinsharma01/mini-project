@@ -1,7 +1,20 @@
-@import url("../../../base/main.css");
-@import url("../../UserIcon/UserIcon.css");
+@import url('../../../base/main.css');
+@import url('../../UserIcon/UserIcon.css');
 
-.active {
-    background: var(--blue);
-    /* margin-left: 20px; */
+.activeSidebar {
+  background: var(--blue);
+  box-shadow: var(--blue-shadow);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.contactSidebarCard {
+  padding: 5px 7px;
+  display: flex;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.contactSidebarCard:hover {
+  box-shadow: var(--blue-shadow);
 }

@@ -1,14 +1,14 @@
-import React from "react";
-import "./MessageCard.css";
+import React from 'react'
+import './MessageCard.css'
 
-const MessageCard = ({ children, me, sender }) => {
+const MessageCard = ({ children, sender }) => {
   return (
-    <div style={{ position: "relative" }}>
-      <div className={sender ? "message__sender" : "message__me"}>
+    <div style={{ position: 'relative' }}>
+      <div className={sender ? 'message__sender' : 'message__me'}>
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MessageCard;
+export default MessageCard

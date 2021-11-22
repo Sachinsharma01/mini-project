@@ -3,37 +3,23 @@ import UserIcon from '../../UserIcon'
 import './SideBarContact.css'
 import { useAppContext } from '../../../base/context'
 
-const SidebarContact = ({
-  active,
-  uid,
-  name,
-  message,
-  timeStamp,
-  sender,
-  setSelected,
-}) => {
-  const [{ user, senderUser }, dispatch] = useAppContext()
+const SidebarContact = ({ active, name, message, sender, setSelected }) => {
+  const [{ user }] = useAppContext()
 
   const activeUserHandler = () => {
     setSelected(sender)
   }
 
-  const activeBlue = active && active?.uid === sender?.uid ? 'active' : ''
+  const activeBlue =
+    active && active?.uid === sender?.uid ? 'activeSidebar' : ''
   return (
     <div
-      style={{
-        height: '100px',
-        width: '100%',
-        display: 'flex',
-        marginTop: '10px',
-        marginLeft: '10px',
-        borderRadius: '10px',
-      }}
-      className={activeBlue}
+      className={`${activeBlue}`}
+      style={{ marginTop: '10px' }}
       onClick={activeUserHandler}
     >
-      <div style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
-        <div style={{ marginLeft: '10px' }}>
+      <div className='contactSidebarCard '>
+        <div>
           <UserIcon src={user?.profile_pic} online={true} />
         </div>
         <div
@@ -42,15 +28,15 @@ const SidebarContact = ({
             display: 'flex',
             flexDirection: 'column',
             fontWeight: 'bold',
-            // color: activeUser ? 'black' : 'grey',
           }}
         >
           {name}
           <p style={{ fontWeight: 'normal' }}>
-            {message?.substring(0, 20) + ' ...'}
+            {message?.length > 30
+              ? message?.substring(0, 30) + ' ...'
+              : message}
           </p>
         </div>
-        <div>{timeStamp}</div>
       </div>
     </div>
   )

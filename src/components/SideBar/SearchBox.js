@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Sidebar.css'
 import SidebarContact from './SideBarContact'
 import { fetchSearchResults } from '../.././base/fetchData'
+import { AiOutlineSearch } from 'react-icons/ai'
 
 const SearchBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
   const [queryData, setQueryData] = useState([])
@@ -9,11 +10,24 @@ const SearchBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
 
   return (
     <>
-      <div>
-        <input value={query} onChange={(e) => setQuery(e.target.value)} />
-        <button onClick={() => fetchSearchResults(query, setQueryData)}>
-          Search
-        </button>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          margin: '20px',
+          justifyContent: 'space-evenly',
+        }}
+      >
+        <input
+          class='searchInput'
+          placeholder='Enter user name'
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <AiOutlineSearch
+          className={`searchIcon`}
+          onClick={() => fetchSearchResults(query, setQueryData)}
+        />
       </div>
       {queryData.map((data, index) => {
         return (

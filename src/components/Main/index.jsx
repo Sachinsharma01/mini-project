@@ -33,13 +33,13 @@ const Main = ({ searchNew }) => {
       {newmsg.map((obj) => {
         if (obj) {
           return (
-            <MessageCard sender={obj?.sender !== user?.uid}>
+            <MessageCard sender={obj?.sender === user?.uid}>
               {obj?.msg}
             </MessageCard>
           )
         }
       })}
-      {/* <ChatInput handleClick={handlePushMessage} /> */}
+      <ChatInput handleClick={handlePushMessage} />
     </div>
   )
 }

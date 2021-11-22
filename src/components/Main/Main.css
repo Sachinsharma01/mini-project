@@ -1,5 +1,7 @@
 @import url('../../base/main.css');
-.main {
-  background-color: white;
-  height: inherit;
+
+.mainContainer {
+  width: 75%;
+  height: calc(100vh - 120px);
+  overflow-y: scroll;
 }

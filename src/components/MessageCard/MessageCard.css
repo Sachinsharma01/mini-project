@@ -1,10 +1,10 @@
-@import url("../../base/main.css");
+@import url('../../base/main.css');
 
 .message__sender {
   width: 40%;
   background-color: var(--light-blue);
   padding: 1rem 0.7rem;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 1rem 5rem;
 }
 
@@ -13,6 +13,6 @@
   width: 40%;
   background-color: var(--orange);
   padding: 1rem 0.7rem;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 1rem 2rem 1rem calc(60% - 3rem);
 }

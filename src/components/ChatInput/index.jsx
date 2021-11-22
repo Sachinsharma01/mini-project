@@ -5,21 +5,32 @@ import { IoSend } from 'react-icons/io5'
 const ChatInput = ({ handleClick }) => {
   const [value, setValue] = useState('')
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    handleClick(value)
+    setValue('')
+  }
+
   return (
-    <div className='input'>
+    <div className='inputChat'>
       <input
         type='text'
         placeholder='Type a message..'
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key == 'Enter') {
+            handleSubmit(e)
+          }
+        }}
       ></input>
       <button
-        onClick={() => {
-          handleClick(value)
-          setValue('')
+        type='submit'
+        onSubmit={(e) => {
+          handleSubmit(e)
         }}
       >
-        <IoSend className='sendIcon'></IoSend>
+        <IoSend className='sendIcon' />
       </button>
     </div>
   )
