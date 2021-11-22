@@ -39,7 +39,7 @@ const Main = ({ searchNew }) => {
           )
         }
       })}
-      <ChatInput handleClick={handlePushMessage} />
+      {/* <ChatInput handleClick={handlePushMessage} /> */}
     </div>
   )
 }

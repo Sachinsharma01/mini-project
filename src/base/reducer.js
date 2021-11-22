@@ -25,11 +25,11 @@ const reducer = (state, action) => {
           available: action.payload,
         },
       }
-    // case 'SET_RELATION':
-    //   return {
-    //     ...state,
-    //     relations: [...state.relations, action.payload],
-    //   }
+    case 'SET_RELATION_ARRAY':
+      return {
+        ...state,
+        relations: action.payload,
+      }
     case 'SET_SENDER':
       return {
         ...state,

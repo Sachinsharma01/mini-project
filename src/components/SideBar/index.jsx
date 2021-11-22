@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './Sidebar.css'
-import SidebarContact from './SideBarContact'
-import { fetchRelations, fetchSearchResults } from '../.././base/fetchData'
 import { useAppContext } from '../../base/context'
+import ContactBox from './ContactBox'
+import SearchBox from './SearchBox'
+import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
 
 const Sidebar = ({ setSearchNew }) => {
-  const [{ user, relations, senderUser }, dispatch] = useAppContext()
+  const [{ senderUser }, dispatch] = useAppContext()
   const [selectedUser, setSelectedUser] = useState(senderUser)
-
-  useEffect(() => {
-    fetchRelations(user, dispatch)
-  }, [])
+  const [contactBox, setContactBox] = useState(true)
 
   useEffect(() => {
     dispatch({
@@ -19,47 +17,34 @@ const Sidebar = ({ setSearchNew }) => {
     })
   }, [selectedUser, setSelectedUser])
 
-  const [query, setQuery] = useState('')
-  const [queryData, setQueryData] = useState([])
-
   return (
-    <div className='relations'>
-      {relations?.map((relation, index) => (
-        <div onClick={() => setSearchNew(false)}>
-          <SidebarContact
-            active={selectedUser}
-            sender={relation}
-            setSelected={setSelectedUser}
-            key={index}
-            uid={relation?.uid}
-            name={relation?.first_name}
-            message='hello there!!'
-            timestamp='2:56'
+    <>
+      <div className='relations'>
+        {contactBox ? (
+          <ContactBox
+            selectedUser={selectedUser}
+            setSelectedUser={setSelectedUser}
+            setSearchNew={setSearchNew}
+          />
+        ) : (
+          <SearchBox
+            selectedUser={selectedUser}
+            setSelectedUser={setSelectedUser}
+            setSearchNew={setSearchNew}
+          />
+        )}
+        <div className='sidebar__footer'>
+          <AiOutlineUser
+            className={`userIcon ${contactBox && 'active'}`}
+            onClick={() => setContactBox(true)}
+          />
+          <AiOutlineSearch
+            className={`searchIcon ${!contactBox && 'active'}`}
+            onClick={() => setContactBox(false)}
           />
         </div>
-      ))}
-      <div>
-        <input value={query} onChange={(e) => setQuery(e.target.value)} />
-        <button onClick={() => fetchSearchResults(query, setQueryData)}>
-          Search
-        </button>
       </div>
-      {queryData.map((data, index) => {
-        return (
-          <div onClick={() => setSearchNew(true)}>
-            <SidebarContact
-              active={selectedUser}
-              sender={data}
-              setSearchNew={setSearchNew}
-              setSelected={setSelectedUser}
-              key={index}
-              uid={data?.uid}
-              name={data?.first_name}
-            />
-          </div>
-        )
-      })}
-    </div>
+    </>
   )
 }
 

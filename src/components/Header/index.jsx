@@ -9,8 +9,6 @@ import { auth } from '../../base/firebase'
 
 const Header = () => {
   const [showContactCard, setShowContactCard] = useState(false)
-  const [showLogin, setShowLogin] = useState(false)
-  const [signup, setSignup] = useState()
   const [{ user, senderUser }, dispatch] = useAppContext()
 
   useEffect(() => {
@@ -22,31 +20,21 @@ const Header = () => {
     }
   }, [])
 
-  const handleChange = (e) => {
-    dispatch({
-      type: 'SET_USER_AVAILABLE',
-      payload: !!parseInt(e.target.value),
-    })
-  }
-
   return (
     <div className='header'>
+      {!user && (
+        <h1 style={{ color: '#fff', fontSize: '32px', fontWeight: '900' }}>
+          ᑕᕼᗩ丅 ᐯᗴᖇᔕᗴ
+        </h1>
+      )}
       {user && (
         <>
           <div className='header__currentUser'>
-            <div style={{ marginRight: '10em' }}>
+            <div style={{ display: 'flex' }}>
               <UserIcon src={user?.profile_pic} online={user?.available} />
-              <div className='currentUser__availability'>
-                <h2>{user?.user_name}</h2>
-                <select onChange={(e) => handleChange(e)}>
-                  <option value={1} style={{ backgroundColor: 'green' }}>
-                    Online
-                  </option>
-                  <option value={0} style={{ backgroundColor: 'gray' }}>
-                    Offline
-                  </option>
-                </select>
-              </div>
+              <h2>
+                {user?.first_name} {user?.last_name}
+              </h2>
             </div>
             <ThreedotMenu>
               <ThreedotItem onClick={() => {}}>Profile</ThreedotItem>
@@ -65,68 +53,46 @@ const Header = () => {
         </>
       )}
       <div className='header__senderUser'>
-        {!user && (
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-evenly',
-            }}
-          >
-            <h2
-              className='header__auth'
-              onClick={() => {
-                setSignup(true)
-                setShowLogin(true)
-              }}
-            >
-              Login
-            </h2>
-            <h2
-              className='header__auth'
-              onClick={() => {
-                setSignup(false)
-                setShowLogin(true)
-              }}
-            >
-              Signup
-            </h2>
+        {senderUser && (
+          <div style={{ marginRight: '15em' }}>
+            <ThreedotMenu white>
+              <ThreedotItem
+                onClick={() => {
+                  setShowContactCard(true)
+                }}
+              >
+                Contact Card
+              </ThreedotItem>
+            </ThreedotMenu>
+            {showContactCard && (
+              <ContactCard
+                setShowContactCard={setShowContactCard}
+                senderUser={senderUser}
+              />
+            )}
           </div>
         )}
         {user && senderUser && (
           <>
-            <div>
+            <div style={{ display: 'flex', margin: '0 auto' }}>
               <UserIcon
                 src={senderUser?.profile_pic}
                 online={senderUser?.available}
               />
-              <h2>
+              <h2
+                style={{
+                  fontSize: '1.15rem',
+                  marginLeft: '10px',
+                  color: '#fff',
+                }}
+              >
                 {senderUser?.first_name} {senderUser?.last_name}
               </h2>
             </div>
           </>
         )}
       </div>
-      {!user && showLogin && <Auth state={signup} />}
-      {senderUser && (
-        <>
-          <ThreedotMenu white>
-            <ThreedotItem
-              onClick={() => {
-                setShowContactCard(true)
-              }}
-            >
-              Contact Card
-            </ThreedotItem>
-          </ThreedotMenu>
-          {showContactCard && (
-            <ContactCard
-              setShowContactCard={setShowContactCard}
-              senderUser={senderUser}
-            />
-          )}
-        </>
-      )}
+      {!user && <Auth />}
     </div>
   )
 }

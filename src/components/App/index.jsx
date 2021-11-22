@@ -9,19 +9,22 @@ const App = () => {
   const [searchNew, setSearchNew] = useState(false)
 
   return (
+    // <div
+    //   style={{
+    //     height: '100vh',
+    //     backgroundImage: 'linear-gradient(to top, #a1b6eb, #edf6fc)',
+    //   }}
+    // >
     <>
       <Header />
       <div style={{ display: 'flex' }}>
-        <div style={{ width: '22.5%' }}>
-          {user && <Sidebar setSearchNew={setSearchNew} />}
-        </div>
-        <div style={{ width: '77.5%' }}>
-          {user && senderUser && (
-            <Main searchNew={searchNew} setSearchNew={setSearchNew} />
-          )}
-        </div>
+        {user && <Sidebar setSearchNew={setSearchNew} />}
+        {user && senderUser && (
+          <Main searchNew={searchNew} setSearchNew={setSearchNew} />
+        )}
       </div>
     </>
+    // </div>
   )
 }
 

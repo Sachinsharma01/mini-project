@@ -5,64 +5,40 @@
   background-color: var(--blue);
   display: flex;
   align-items: center;
-  padding-right: 15em;
-}
-.header__auth {
-  cursor: pointer;
-  font-size: 1.25em;
-  font-weight: 600;
-}
-
-.header__auth:hover {
-  text-decoration: underline;
+  position: relative;
+  z-index: 9999;
 }
 
 .header__currentUser,
 .header__senderUser {
-  padding: 0.35rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 5px 10px;
+  width: 25%;
   background-color: var(--light-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.header__currentUser {
-  width: 1/4;
+.header__currentUser h2 {
+  margin-left: 10px;
+  font-size: 1.15rem;
+}
+
+.header__currentUser h2:hover {
+  text-decoration: underline;
+  color: var(--blue);
+  cursor: pointer;
 }
 
 .header__senderUser {
-  width: 3/4;
+  width: 75%;
+  padding: 0;
+  display: flex;
+  flex-direction: row-reverse;
   background-color: var(--blue);
 }
 
-.currentUser__availability {
-  margin-left: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.currentUser__availability h2 {
-  font-size: 1rem;
-  text-transform: capitalize;
-}
-
-.currentUser__availability select {
-  padding: 5px 20px;
-  border: none;
-  outline: none;
-  background-color: var(--blue);
-  font-size: 0.75rem;
-  color: var(--light-blue);
-}
-
-.header__currentUser div,
-.header__senderUser div {
-  display: flex;
-  align-items: center;
-}
-
-.header__senderUser div h2 {
-  margin-left: 20px;
-  text-transform: capitalize;
-  color: white;
+.header__senderUser h2:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
