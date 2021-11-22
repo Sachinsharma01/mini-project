@@ -2,5 +2,6 @@
 @import url("../../UserIcon/UserIcon.css");
 
 .active {
-    background: var(--blue);;
+    background: var(--blue);
+    /* margin-left: 20px; */
 }
