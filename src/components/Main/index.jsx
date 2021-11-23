@@ -5,6 +5,7 @@ import { fetchMessages } from '../../base/fetchData'
 import { useAppContext } from '../../base/context'
 import ChatInput from '../ChatInput'
 import { pushMessage, pushRelation } from '../../base/pushData'
+import ScrollableFeed from 'react-scrollable-feed'
 
 const Main = ({ searchNew, hamOpen }) => {
   const [{ user, senderUser }, dispatch] = useAppContext()
@@ -33,17 +34,21 @@ const Main = ({ searchNew, hamOpen }) => {
 
   return (
     <div className={`mainContainer ${hamOpen ? 'open' : ''}`}>
-      {newmsg.map((obj, index) => {
-        if (obj) {
-          return (
-            <MessageCard key={index} sender={obj?.sender === user?.uid}>
-              {obj?.msg}
-            </MessageCard>
-          )
-        } else {
-          return ''
-        }
-      })}
+      <ScrollableFeed>
+        {newmsg.map((obj, index) => {
+          if (obj) {
+            return (
+              <>
+                <MessageCard key={index} sender={obj?.sender === user?.uid}>
+                  {obj?.msg}
+                </MessageCard>
+              </>
+            )
+          } else {
+            return ''
+          }
+        })}
+      </ScrollableFeed>
       {!hamOpen && <ChatInput handleClick={handlePushMessage} />}
     </div>
   )
