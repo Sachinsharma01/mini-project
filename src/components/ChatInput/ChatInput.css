@@ -35,7 +35,7 @@ button {
     width: 58%;
   }
   .inputChat {
-    bottom: calc(10% + 12px);
+    bottom: calc(10% + 15px);
   }
 }
 
