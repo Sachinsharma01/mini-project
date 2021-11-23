@@ -4,19 +4,30 @@ import './Sidebar.css'
 import { fetchRelations } from '../.././base/fetchData'
 import { useAppContext } from '../../base/context'
 
-const ContactBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
+const ContactBox = ({
+  setSelectedUser,
+  selectedUser,
+  setSearchNew,
+  setHamOpen,
+}) => {
   const [{ user, relations }, dispatch] = useAppContext()
 
   useEffect(() => {
     fetchRelations(user, dispatch)
-  }, [])
+  }, [user, dispatch])
 
   return (
     <>
       {relations?.map((relation, index) => {
         if (relation.uid) {
           return (
-            <div onClick={() => setSearchNew(false)}>
+            <div
+              key={index}
+              onClick={() => {
+                setSearchNew(false)
+                setHamOpen(false)
+              }}
+            >
               <SidebarContact
                 active={selectedUser}
                 sender={relation}
@@ -27,6 +38,8 @@ const ContactBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
               />
             </div>
           )
+        } else {
+          return 'You have no relations'
         }
       })}
     </>

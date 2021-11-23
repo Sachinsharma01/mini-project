@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import UserIcon from '../../UserIcon'
 import './SideBarContact.css'
 import { useAppContext } from '../../../base/context'

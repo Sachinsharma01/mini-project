@@ -48,6 +48,7 @@
 
 .threeDotsMenu {
   position: absolute;
+  right: 0;
   top: 2em;
   min-width: 10rem;
   display: inline-flex;
@@ -59,7 +60,7 @@
 }
 
 .threeDotItem {
-  min-width: 10rem;
+  min-width: 8rem;
   font-size: 1rem;
   padding: 10px 15px;
   transition: 0.5s;

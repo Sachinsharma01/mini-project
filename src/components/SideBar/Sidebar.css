@@ -1,22 +1,22 @@
 @import url('../../base/main.css');
 .relations {
-  width: 25%;
+  width: 30%;
   position: relative;
-  padding: 0 10px;
+  padding: 0 7.5px;
   background: var(--light-blue);
-  height: calc(100vh - 120px);
+  height: calc(100vh - 72px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
 .sidebar__footer {
   background-color: var(--light-blue);
-  position: fixed;
+  position: sticky;
   display: flex;
   align-items: center;
   bottom: 0;
   left: 0;
-  width: inherit;
+  width: 100%;
   justify-content: space-evenly;
   padding: 9px 7.5px;
 }
@@ -73,5 +73,30 @@
   border: 1px solid gray;
   border-radius: 5px;
   padding: 10px;
-  box-shadow: var(--blue-shadow);
+}
+
+@media only screen and (max-width: 1000px) {
+  .relations {
+    width: 35%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .relations.open {
+    padding: 0 10px;
+    width: 75%;
+    position: relative;
+    transition: 0.5s;
+    transform: translateX(-100%);
+  }
+
+  .relations {
+    padding: 0;
+    width: 0;
+  }
+
+  .relations.open {
+    transition: 0.5s;
+    transform: translateX(0);
+  }
 }

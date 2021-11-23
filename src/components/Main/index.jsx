@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import './Main.css'
 import MessageCard from '../MessageCard'
 import { fetchMessages } from '../../base/fetchData'
@@ -6,16 +6,19 @@ import { useAppContext } from '../../base/context'
 import ChatInput from '../ChatInput'
 import { pushMessage, pushRelation } from '../../base/pushData'
 
-const Main = ({ searchNew }) => {
+const Main = ({ searchNew, hamOpen }) => {
   const [{ user, senderUser }, dispatch] = useAppContext()
   const [newmsg, setnewmsg] = useState([])
 
-  const uids = [user?.uid.toString(), senderUser?.uid.toString()]
+  const uids = useMemo(
+    () => [user?.uid.toString(), senderUser?.uid.toString()],
+    [user?.uid, senderUser?.uid]
+  )
   uids.sort()
 
   useEffect(() => {
     fetchMessages(uids[1], uids[0], dispatch, setnewmsg)
-  }, [senderUser])
+  }, [senderUser, dispatch, uids])
 
   useEffect(() => {
     setnewmsg([])
@@ -29,17 +32,19 @@ const Main = ({ searchNew }) => {
   }
 
   return (
-    <div className='mainContainer'>
-      {newmsg.map((obj) => {
+    <div className={`mainContainer ${hamOpen ? 'open' : ''}`}>
+      {newmsg.map((obj, index) => {
         if (obj) {
           return (
-            <MessageCard sender={obj?.sender === user?.uid}>
+            <MessageCard key={index} sender={obj?.sender === user?.uid}>
               {obj?.msg}
             </MessageCard>
           )
+        } else {
+          return ''
         }
       })}
-      <ChatInput handleClick={handlePushMessage} />
+      {!hamOpen && <ChatInput handleClick={handlePushMessage} />}
     </div>
   )
 }

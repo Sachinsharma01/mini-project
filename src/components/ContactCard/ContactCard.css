@@ -10,7 +10,7 @@
   background-color: var(--light-blue);
   box-shadow: var(--blue-shadow);
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 5px;
   min-width: 300px;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .contactCard__userInfo {
-  padding: 1.15empx;
+  padding: 1.15em;
 }
 
 .contactCard-name,
@@ -71,7 +71,7 @@ h1 {
   padding: 10px;
   font-size: 1rem;
   margin: 10px 0;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: transparent;
   outline: none;
   border: var(--blue) 2px solid;
@@ -82,4 +82,23 @@ h1 {
 .deleteChat:hover {
   background-color: var(--blue);
   color: var(--light-blue);
+}
+
+@media only screen and (max-width: 700px) {
+  .contactCard {
+    bottom: 2em;
+    right: 2em;
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+  .contactCard__buttons {
+    padding: 5px;
+    margin: 10px;
+  }
+  .closeButton {
+    top: 0.5em;
+  }
 }

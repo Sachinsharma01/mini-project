@@ -7,7 +7,7 @@ import { useAppContext } from '../../base/context'
 import Auth from '../Authentication'
 import { auth } from '../../base/firebase'
 
-const Header = () => {
+const Header = ({ setHamOpen, hamOpen }) => {
   const [showContactCard, setShowContactCard] = useState(false)
   const [{ user, senderUser }, dispatch] = useAppContext()
 
@@ -18,7 +18,7 @@ const Header = () => {
         payload: JSON.parse(localStorage.getItem('user')),
       })
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <div className='header'>
@@ -29,7 +29,7 @@ const Header = () => {
       )}
       {user && (
         <>
-          <div className='header__currentUser'>
+          <div className={`header__currentUser ${hamOpen ? 'open' : ''}`}>
             <div style={{ display: 'flex' }}>
               <UserIcon src={user?.profile_pic} online={user?.available} />
               <h2>
@@ -52,9 +52,19 @@ const Header = () => {
           </div>
         </>
       )}
-      <div className='header__senderUser'>
-        {senderUser && (
-          <div style={{ marginRight: '15em' }}>
+      <div
+        style={{ position: 'absolute', left: `${!hamOpen ? '20px' : '80%'}` }}
+        onClick={() => setHamOpen((prev) => !prev)}
+      >
+        <div className={`hamburger ${hamOpen ? 'open' : ''}`}>
+          <span className='line'></span>
+          <span className='line'></span>
+          <span className='line'></span>
+        </div>
+      </div>
+      <div className={`header__senderUser ${hamOpen ? 'open' : ''}`}>
+        {senderUser && !hamOpen && (
+          <div className='headerContactMenu'>
             <ThreedotMenu white>
               <ThreedotItem
                 onClick={() => {
@@ -72,7 +82,7 @@ const Header = () => {
             )}
           </div>
         )}
-        {user && senderUser && (
+        {user && senderUser && !hamOpen && (
           <>
             <div style={{ display: 'flex', margin: '0 auto' }}>
               <UserIcon

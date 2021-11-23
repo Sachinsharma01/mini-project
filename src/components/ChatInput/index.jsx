@@ -12,14 +12,14 @@ const ChatInput = ({ handleClick }) => {
   }
 
   return (
-    <div className='inputChat'>
+    <div className={`inputChat`}>
       <input
         type='text'
         placeholder='Type a message..'
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key == 'Enter') {
+          if (e.key === 'Enter') {
             handleSubmit(e)
           }
         }}

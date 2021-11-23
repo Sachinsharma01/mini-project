@@ -7,8 +7,8 @@ import { signupWithEmail } from '../../base/auth'
 import { useAppContext } from '../../base/context'
 
 function Register() {
-  const [{ user }, dispatch] = useAppContext()
-  var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+  const [{}, dispatch] = useAppContext() // eslint-disable-line
+  var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/
   var capAlpha = /[A-Za-z]/
   var dig = /[0-9]/
   const validation = yup.object().shape({

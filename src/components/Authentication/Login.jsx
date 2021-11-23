@@ -10,7 +10,7 @@ const validation = yup.object().shape({
   password: yup.string().required().min(8),
 })
 function Login() {
-  const [{}, dispatch] = useAppContext()
+  const [{}, dispatch] = useAppContext() // eslint-disable-line
   return (
     <div className='container'>
       <Formik
@@ -44,7 +44,7 @@ function Login() {
               Login
             </button>
             <div className='itemContainer'>
-              <a className='forgotPassword' href=''>
+              <a className='forgotPassword' href='/#'>
                 forgot password?
               </a>
             </div>

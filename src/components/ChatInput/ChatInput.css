@@ -29,3 +29,18 @@ button {
   padding: 0 3em;
   font-weight: bold;
 }
+
+@media only screen and (max-width: 1000px) {
+  .inputChat input {
+    width: 58%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .inputChat input {
+    width: 80%;
+  }
+  .inputChat button {
+    padding: 0 1em;
+  }
+}

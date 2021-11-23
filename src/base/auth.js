@@ -1,4 +1,4 @@
-import { auth, googleAuth, db } from './firebase'
+import { auth, db, googleAuth } from './firebase'
 import { pushNewUser, pushGoogleUser } from './pushData'
 
 export const signupWithEmail = (

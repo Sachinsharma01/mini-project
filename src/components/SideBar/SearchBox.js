@@ -4,9 +4,18 @@ import SidebarContact from './SideBarContact'
 import { fetchSearchResults } from '../.././base/fetchData'
 import { AiOutlineSearch } from 'react-icons/ai'
 
-const SearchBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
+const SearchBox = ({
+  setSelectedUser,
+  selectedUser,
+  setSearchNew,
+  setHamOpen,
+}) => {
   const [queryData, setQueryData] = useState([])
   const [query, setQuery] = useState('')
+
+  const handleClick = () => {
+    fetchSearchResults(query, setQueryData)
+  }
 
   return (
     <>
@@ -19,22 +28,26 @@ const SearchBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
         }}
       >
         <input
-          class='searchInput'
+          className='searchInput'
           placeholder='Enter user name'
           value={query}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleClick()
+            }
+          }}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <AiOutlineSearch
-          className={`searchIcon`}
-          onClick={() => fetchSearchResults(query, setQueryData)}
-        />
+        <AiOutlineSearch className={`searchIcon`} onClick={handleClick} />
       </div>
       {queryData.map((data, index) => {
         return (
           <div
+            key={index}
             onClick={() => {
               setSearchNew(true)
               setQuery('')
+              setHamOpen(false)
             }}
           >
             <SidebarContact
@@ -44,8 +57,8 @@ const SearchBox = ({ setSelectedUser, selectedUser, setSearchNew }) => {
               setSearchNew={setSearchNew}
               setSelected={setSelectedUser}
               key={index}
-              uid={data?.uid}
-              name={data?.first_name}
+              name={`${data?.first_name} ${data?.last_name}`}
+              message={data?.user_name}
             />
           </div>
         )

@@ -1,5 +1,5 @@
 import { db } from './firebase'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export const pushMessage = (msg, id1, id2, sender) => {
   db.collection('chats').doc(id1).collection(id2).add({

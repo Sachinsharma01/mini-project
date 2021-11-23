@@ -5,7 +5,7 @@ import ContactBox from './ContactBox'
 import SearchBox from './SearchBox'
 import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai'
 
-const Sidebar = ({ setSearchNew }) => {
+const Sidebar = ({ setSearchNew, hamOpen, setHamOpen }) => {
   const [{ senderUser }, dispatch] = useAppContext()
   const [selectedUser, setSelectedUser] = useState(senderUser)
   const [contactBox, setContactBox] = useState(true)
@@ -15,20 +15,22 @@ const Sidebar = ({ setSearchNew }) => {
       type: 'SET_SENDER',
       payload: selectedUser,
     })
-  }, [selectedUser, setSelectedUser])
+  }, [selectedUser, setSelectedUser, dispatch])
 
   return (
     <>
-      <div className='relations'>
+      <div className={`relations ${hamOpen ? 'open' : ''}`}>
         {contactBox ? (
           <ContactBox
             selectedUser={selectedUser}
+            setHamOpen={setHamOpen}
             setSelectedUser={setSelectedUser}
             setSearchNew={setSearchNew}
           />
         ) : (
           <SearchBox
             selectedUser={selectedUser}
+            setHamOpen={setHamOpen}
             setSelectedUser={setSelectedUser}
             setSearchNew={setSearchNew}
           />

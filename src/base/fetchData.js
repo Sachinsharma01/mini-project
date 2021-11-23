@@ -28,7 +28,7 @@ export const fetchMessages = (user, sender, setMessages, setNewMsg) => {
     .orderBy('time', 'asc')
     .onSnapshot((r) => {
       setNewMsg([])
-      r.docs.map((t) => {
+      r.docs.forEach((t) => {
         setNewMsg((prev) => [...prev, t.data()])
         setMessages({
           type: 'SET_MESSAGES',
@@ -41,7 +41,7 @@ export const fetchMessages = (user, sender, setMessages, setNewMsg) => {
 export const fetchSearchResults = (searchQuery, setQueryResults) => {
   db.collection('users').onSnapshot((r) => {
     setQueryResults([])
-    r.docs.map((t) => {
+    r.docs.forEach((t) => {
       if (t.data().user_name.includes(searchQuery)) {
         setQueryResults((prev) => [...prev, t.data()])
       }
