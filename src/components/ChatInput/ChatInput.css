@@ -33,7 +33,9 @@ button {
 @media only screen and (max-width: 1000px) {
   .inputChat input {
     width: 58%;
-    bottom: 15%;
+  }
+  .inputChat {
+    bottom: calc(10% + 12px);
   }
 }
 
