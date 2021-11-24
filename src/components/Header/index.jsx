@@ -52,16 +52,18 @@ const Header = ({ setHamOpen, hamOpen }) => {
           </div>
         </>
       )}
-      <div
-        style={{ position: 'absolute', left: `${!hamOpen ? '20px' : '80%'}` }}
-        onClick={() => setHamOpen((prev) => !prev)}
-      >
-        <div className={`hamburger ${hamOpen ? 'open' : ''}`}>
-          <span className='line'></span>
-          <span className='line'></span>
-          <span className='line'></span>
+      {user && (
+        <div
+          style={{ position: 'absolute', left: `${!hamOpen ? '20px' : '80%'}` }}
+          onClick={() => setHamOpen((prev) => !prev)}
+        >
+          <div className={`hamburger ${hamOpen ? 'open' : ''}`}>
+            <span className='line'></span>
+            <span className='line'></span>
+            <span className='line'></span>
+          </div>
         </div>
-      </div>
+      )}
       <div className={`header__senderUser ${hamOpen ? 'open' : ''}`}>
         {senderUser && !hamOpen && (
           <div className='headerContactMenu'>

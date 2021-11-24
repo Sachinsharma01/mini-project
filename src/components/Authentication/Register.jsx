@@ -6,7 +6,7 @@ import './Authentication.css'
 import { signupWithEmail } from '../../base/auth'
 import { useAppContext } from '../../base/context'
 
-function Register({authPage,setAuthPage}) {
+function Register({ setAuthPage }) {
   const [{}, dispatch] = useAppContext() // eslint-disable-line
   var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/
   var capAlpha = /[A-Z]/
@@ -19,15 +19,15 @@ function Register({authPage,setAuthPage}) {
     password: yup
       .string()
       .required()
-      .matches('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')
+      .matches('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})')
       .min(8),
   })
   return (
     <div className='authContainer'>
-      <h2 className='authHeading'>
-        Sign Up
-      </h2>
-      <p className="authSubHeading">we are trying our best to connect you throughout the world!!</p>
+      <h2 className='authHeading'>Sign Up</h2>
+      <p className='authSubHeading'>
+        we are trying our best to connect you throughout the world!!
+      </p>
       <Formik
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={validation}
@@ -47,8 +47,6 @@ function Register({authPage,setAuthPage}) {
           touched,
           errors,
           handleSubmit,
-          handleBlur,
-          handleChange,
           isValid,
         }) => {
           return (
@@ -138,12 +136,14 @@ function Register({authPage,setAuthPage}) {
                 Register
               </button>
             </>
-
           )
         }}
       </Formik>
       <div className='authSetShow'>
-        <p>Already registered<a className='authLink' href="" onClick={()=>{setAuthPage(true)}}> Login</a></p>
+        Already registered
+        <span className='authLink' onClick={() => setAuthPage(true)}>
+          Login
+        </span>
       </div>
     </div>
   )

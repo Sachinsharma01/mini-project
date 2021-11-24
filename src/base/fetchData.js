@@ -1,14 +1,16 @@
 import { db } from './firebase'
 
 export const fetchRelations = (user, setRelations) => {
-  setRelations({
-    type: 'SET_RELATION_ARRAY',
-    payload: [],
-  })
   db.collection('users')
     .doc(user.uid)
     .onSnapshot((snapshot) => {
-      snapshot.data().relations.forEach((rel) => {
+      snapshot.data().relations.forEach((rel, index) => {
+        if (index === 0) {
+          setRelations({
+            type: 'SET_RELATION_ARRAY',
+            payload: [],
+          })
+        }
         db.collection('users')
           .doc(rel)
           .onSnapshot((snap) => {
