@@ -6,10 +6,11 @@ import './Authentication.css'
 import { signupWithEmail } from '../../base/auth'
 import { useAppContext } from '../../base/context'
 
-function Register() {
+function Register({authPage,setAuthPage}) {
   const [{}, dispatch] = useAppContext() // eslint-disable-line
   var format = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+/
-  var capAlpha = /[A-Za-z]/
+  var capAlpha = /[A-Z]/
+  var smallAlpha = /[a-z]/
   var dig = /[0-9]/
   const validation = yup.object().shape({
     firstName: yup.string().required(),
@@ -18,11 +19,15 @@ function Register() {
     password: yup
       .string()
       .required()
-      .matches('([A-Za-z])([@$!%*#?&a-zA-Z0-9])([@$!%*#?&])[0-9]')
+      .matches('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})')
       .min(8),
   })
   return (
-    <div className='container'>
+    <div className='authContainer'>
+      <h2 className='authHeading'>
+        Sign Up
+      </h2>
+      <p className="authSubHeading">we are trying our best to connect you throughout the world!!</p>
       <Formik
         initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
         validationSchema={validation}
@@ -87,7 +92,16 @@ function Register() {
                       : ''
                   }
                 >
-                  must have alphabet,{' '}
+                  must have a capital letter,{' '}
+                </li>
+                <li
+                  className={
+                    touched.password && smallAlpha.test(values.password)
+                      ? 'green'
+                      : ''
+                  }
+                >
+                  must have a small letter,{' '}
                 </li>
                 <li
                   className={
@@ -116,7 +130,7 @@ function Register() {
                 </li>
               </ul>
               <button
-                className={'button hoverbtn'}
+                className={'authbutton authhoverbtn'}
                 type='submit'
                 onClick={handleSubmit}
                 disabled={!isValid}
@@ -124,9 +138,13 @@ function Register() {
                 Register
               </button>
             </>
+
           )
         }}
       </Formik>
+      <div className='authSetShow'>
+        <p>Already registered<a className='authLink' href="" onClick={()=>{setAuthPage(true)}}> Login</a></p>
+      </div>
     </div>
   )
 }
