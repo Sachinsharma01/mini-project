@@ -9,10 +9,14 @@ const validation = yup.object().shape({
   email: yup.string().required().email(),
   password: yup.string().required().min(8),
 })
-function Login() {
+function Login({authPage, setAuthPage}) {
   const [{}, dispatch] = useAppContext() // eslint-disable-line
   return (
-    <div className='container'>
+    <div className='authContainer'>
+      <h2 className='authHeading'>
+        Sign In
+      </h2>
+      <p className="authSubHeading">we are trying our best to connect you throughout the world!!  </p>
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={validation}
@@ -36,21 +40,28 @@ function Login() {
               errors={errors.password}
               placeholder={'Password'}
             />
+
+<div className='authitemContainer'>
+              <div className='rememberMe'>
+              <input type="checkbox" name='remember' />
+              <label htmlFor="remember">remember me</label>
+              </div>
+              <a className='forgotPassword' href=''>
+                forgot password?
+              </a>
+            </div>
+
             <button
-              className={'button' + (!isValid ? ' hoverbtn' : '')}
+              className={'authbutton' + (!isValid ? ' authhoverbtn' : '')}
               onClick={handleSubmit}
               disabled={!isValid}
             >
               Login
             </button>
-            <div className='itemContainer'>
-              <a className='forgotPassword' href='/#'>
-                forgot password?
-              </a>
-            </div>
-            <div className='itemContainer flexContainer'>
+            
+            <div className='authitemContainer authflexContainer'>
               <hr className='horizontalLine ' />
-              <p>OR</p>
+              <p className='authP'>or login with</p>
               <hr className='horizontalLine' />
             </div>
             <button
@@ -64,6 +75,9 @@ function Login() {
           </>
         )}
       </Formik>
+      <div className='authSetShow'>
+        <p>don't have an account!!<a className='authLink' href="" onClick={()=>{setAuthPage(false)}}>create one</a></p>
+      </div>
     </div>
   )
 }
