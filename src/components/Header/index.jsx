@@ -37,8 +37,8 @@ const Header = ({ setHamOpen, hamOpen }) => {
               </h2>
             </div>
             <ThreedotMenu>
-              <ThreedotItem onClick={() => {}}>Profile</ThreedotItem>
-              <ThreedotItem onClick={() => {}}>Settings</ThreedotItem>
+              {/* <ThreedotItem onClick={() => {}}>Profile</ThreedotItem>
+              <ThreedotItem onClick={() => {}}>Settings</ThreedotItem> */}
               <ThreedotItem
                 onClick={() => {
                   auth.signOut()

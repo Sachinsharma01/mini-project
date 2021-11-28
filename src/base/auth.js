@@ -15,7 +15,15 @@ export const signupWithEmail = (
       // // window.location = '/verifyemail'
       // // auth.sendEmailVerification()
       // auth.signOut()
-      pushNewUser(result.uid, firstname, lastname, email, dispatch)
+      pushNewUser(
+        result.uid,
+        firstname,
+        lastname,
+        email,
+        result.metadata.creationTime,
+        result.metadata.lastSignInTime,
+        dispatch
+      )
     })
     .catch((error) => {
       console.log(error)
@@ -30,15 +38,23 @@ export const loginWithEmail = (dispatch, email, password) => {
       db.collection('users')
         .doc(user.uid)
         .onSnapshot((snapshot) => {
-          localStorage.setItem('user', JSON.stringify(snapshot.data()))
-          dispatch({
-            type: 'SET_USER',
-            payload: snapshot.data(),
-          })
-          localStorage.removeItem('authUser')
+          if (!snapshot.data()) {
+            alert(
+              'You are banned from the application.\nFor further Queries Contact at: admin@chatverse.com'
+            )
+            localStorage.clear()
+          } else {
+            localStorage.setItem('user', JSON.stringify(snapshot.data()))
+            dispatch({
+              type: 'SET_USER',
+              payload: snapshot.data(),
+            })
+            localStorage.removeItem('authUser')
+          }
         })
     })
     .catch((error) => {
+      error.code === 'auth/wrong-password' && alert('Wrong Password')
       console.log(error)
     })
 }
@@ -47,7 +63,9 @@ export const loginWithGoogle = (dispatch) => {
   auth
     .signInWithPopup(googleAuth)
     .then((result) => {
+      console.log(result)
       var user = result.user
+      localStorage.setItem('isNewUser', result.additionalUserInfo.isNewUser)
       localStorage.setItem('authUser', JSON.stringify(user))
       pushGoogleUser(dispatch)
     })
