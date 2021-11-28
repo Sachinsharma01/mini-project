@@ -14,10 +14,12 @@ export const fetchRelations = (user, setRelations) => {
         db.collection('users')
           .doc(rel)
           .onSnapshot((snap) => {
-            setRelations({
-              type: 'SET_RELATION',
-              payload: snap.data(),
-            })
+            if (snap.data().user_name !== 'admin@chatverse.com') {
+              setRelations({
+                type: 'SET_RELATION',
+                payload: snap.data(),
+              })
+            }
           })
       })
     })
@@ -45,7 +47,8 @@ export const fetchSearchResults = (searchQuery, setQueryResults) => {
     setQueryResults([])
     r.docs.forEach((t) => {
       if (t.data().user_name.includes(searchQuery)) {
-        setQueryResults((prev) => [...prev, t.data()])
+        if (t.data().user_name !== 'admin@chatverse.com')
+          setQueryResults((prev) => [...prev, t.data()])
       }
     })
   })
