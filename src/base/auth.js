@@ -26,7 +26,7 @@ export const signupWithEmail = (
       )
     })
     .catch((error) => {
-      console.log(error)
+      alert(error?.message)
     })
 }
 

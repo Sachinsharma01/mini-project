@@ -4,6 +4,15 @@ export const fetchRelations = (user, setRelations) => {
   db.collection('users')
     .doc(user.uid)
     .onSnapshot((snapshot) => {
+      if (!snapshot.data()) {
+        localStorage.clear()
+        window.location.reload()
+        setTimeout(() =>
+          alert(
+            'You have been logged out.\nRetry logging in again or contact the admin at: admin@chatverse.com'
+          )
+        )
+      }
       snapshot.data().relations.forEach((rel, index) => {
         if (index === 0) {
           setRelations({
