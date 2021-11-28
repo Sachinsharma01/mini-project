@@ -114,5 +114,5 @@ export const pushDeleteRequest = (senderUser) => {
         })
     })
   })
-  window.location.reload()
+  setTimeout(() => window.location.reload(), 200)
 }
