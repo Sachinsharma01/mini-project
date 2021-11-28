@@ -4,8 +4,11 @@ import './ContactCard.css'
 import { IoCloseCircle } from 'react-icons/io5'
 import { BiBlock } from 'react-icons/bi'
 import { MdDeleteOutline } from 'react-icons/md'
+import { pushDeleteChat, pushBlockRequest } from '../../base/pushData'
+import { useAppContext } from '../../base/context'
 
 const ContactCard = ({ setShowContactCard, senderUser }) => {
+  const [{ user }] = useAppContext()
   return (
     <div className='contactCard'>
       <div onClick={() => setShowContactCard(false)}>
@@ -26,10 +29,20 @@ const ContactCard = ({ setShowContactCard, senderUser }) => {
         </div>
       </div>
       <div className='contactCard__buttons'>
-        <button className='blockContact' onClick={() => {}}>
+        {/* <button
+          className='blockContact'
+          onClick={() => {
+            pushBlockRequest(senderUser, user)
+          }}
+        >
           <BiBlock /> Block Contact
-        </button>
-        <button className='deleteChat' onClick={() => {}}>
+        </button> */}
+        <button
+          className='deleteChat'
+          onClick={() => {
+            pushDeleteChat(senderUser, user)
+          }}
+        >
           <MdDeleteOutline /> Delete Chat
         </button>
       </div>

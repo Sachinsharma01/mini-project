@@ -43,22 +43,22 @@ export const pushNewUser = (
 
 export const pushGoogleUser = (dispatch) => {
   const user = JSON.parse(localStorage.getItem('authUser'))
-  if (localStorage.getItem('isNewUser') === 'false') {
-    alert(
-      'You are banned from the application.\nFor further Queries Contact at: admin@chatverse.com'
-    )
-    localStorage.clear()
-  } else {
-    db.collection('users')
-      .doc(user.uid)
-      .onSnapshot((snapshot) => {
-        if (snapshot.data()) {
-          localStorage.setItem('user', JSON.stringify(snapshot.data()))
-          dispatch({
-            type: 'SET_USER',
-            payload: snapshot.data(),
-          })
-          localStorage.removeItem('authUser')
+  db.collection('users')
+    .doc(user.uid)
+    .onSnapshot((snapshot) => {
+      if (snapshot.data()) {
+        localStorage.setItem('user', JSON.stringify(snapshot.data()))
+        dispatch({
+          type: 'SET_USER',
+          payload: snapshot.data(),
+        })
+        localStorage.removeItem('authUser')
+      } else {
+        if (localStorage.getItem('isNewUser') === 'false') {
+          alert(
+            'You are banned from the application.\nFor further Queries Contact at: admin@chatverse.com'
+          )
+          localStorage.clear()
         } else {
           const docData = {
             uid: user.uid,
@@ -70,7 +70,7 @@ export const pushGoogleUser = (dispatch) => {
             status: true,
             user_name: user.email.split('@')[0],
             email: user.email,
-            createdAt: user.creationAt,
+            createdAt: user.createdAt,
             lastLogin: user.lastLoginAt,
           }
           db.collection('users')
@@ -85,8 +85,8 @@ export const pushGoogleUser = (dispatch) => {
           })
           localStorage.removeItem('authUser')
         }
-      })
-  }
+      }
+    })
 }
 
 export const pushRelation = (user, sender) => {
@@ -115,4 +115,17 @@ export const pushDeleteRequest = (senderUser) => {
     })
   })
   setTimeout(() => window.location.reload(), 200)
+}
+
+export const pushDeleteChat = (senderUser, user) => {
+  const arr = [senderUser.uid, user.uid]
+  arr.sort()
+  db.collection('chats')
+    .doc(arr[0])
+    .collection(arr[1])
+    .onSnapshot((snap) => {
+      snap.docs.map((d) => {
+        db.collection(`chats/${arr[0]}/${arr[1]}`).doc(d.id).delete()
+      })
+    })
 }

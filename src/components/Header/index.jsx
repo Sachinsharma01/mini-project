@@ -6,6 +6,7 @@ import './Header.css'
 import { useAppContext } from '../../base/context'
 import Auth from '../Authentication'
 import { auth } from '../../base/firebase'
+import { logout } from '../../base/auth'
 
 const Header = ({ setHamOpen, hamOpen }) => {
   const [showContactCard, setShowContactCard] = useState(false)
@@ -41,9 +42,7 @@ const Header = ({ setHamOpen, hamOpen }) => {
               <ThreedotItem onClick={() => {}}>Settings</ThreedotItem> */}
               <ThreedotItem
                 onClick={() => {
-                  auth.signOut()
-                  localStorage.removeItem('user')
-                  window.location.reload()
+                  logout(user)
                 }}
               >
                 Logout
@@ -65,7 +64,7 @@ const Header = ({ setHamOpen, hamOpen }) => {
         </div>
       )}
       <div className={`header__senderUser ${hamOpen ? 'open' : ''}`}>
-        {senderUser && !hamOpen && (
+        {senderUser && !hamOpen && !user.user_name === 'admin@chatverse.com' && (
           <div className='headerContactMenu'>
             <ThreedotMenu white>
               <ThreedotItem

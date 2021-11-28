@@ -52,6 +52,9 @@ export const loginWithEmail = (dispatch, email, password) => {
             localStorage.removeItem('authUser')
           }
         })
+      db.collection('users').doc(user.uid).update({
+        status: true,
+      })
     })
     .catch((error) => {
       error.code === 'auth/wrong-password' && alert('Wrong Password')
@@ -68,8 +71,20 @@ export const loginWithGoogle = (dispatch) => {
       localStorage.setItem('isNewUser', result.additionalUserInfo.isNewUser)
       localStorage.setItem('authUser', JSON.stringify(user))
       pushGoogleUser(dispatch)
+      db.collection('users').doc(user.uid).update({
+        status: true,
+      })
     })
     .catch((error) => {
       console.log(error)
     })
+}
+
+export const logout = (user) => {
+  db.collection('users').doc(user.uid).update({
+    status: false,
+  })
+  auth.signOut()
+  localStorage.clear()
+  setTimeout(() => window.location.reload())
 }
