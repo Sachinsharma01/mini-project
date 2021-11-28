@@ -1,39 +1,46 @@
-import React, { useState } from 'react'
-import './Sidebar.css'
-import SidebarContact from './SideBarContact'
-import { fetchSearchResults } from '../.././base/fetchData'
-import { AiOutlineSearch } from 'react-icons/ai'
+import React, { useState, useMemo } from "react";
+import "./Sidebar.css";
+import SidebarContact from "./SideBarContact";
+import { fetchSearchResults } from "../.././base/fetchData";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchBox = ({
+  admin,
   setSelectedUser,
   selectedUser,
   setSearchNew,
   setHamOpen,
 }) => {
-  const [queryData, setQueryData] = useState([])
-  const [query, setQuery] = useState('')
+  const [queryData, setQueryData] = useState([]);
+  const [query, setQuery] = useState("");
 
   const handleClick = () => {
-    fetchSearchResults(query, setQueryData)
-  }
+    fetchSearchResults(query, setQueryData);
+  };
+
+  useMemo(() => {
+    if (admin) {
+      fetchSearchResults(query, setQueryData);
+    }
+  }, []);
 
   return (
     <>
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          margin: '20px',
-          justifyContent: 'space-evenly',
+          display: "flex",
+          alignItems: "center",
+          margin: "20px",
+          justifyContent: "space-evenly",
         }}
       >
         <input
-          className='searchInput'
-          placeholder='Enter user name'
+          className="searchInput"
+          placeholder="Enter user name"
           value={query}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleClick()
+            if (e.key === "Enter") {
+              handleClick();
             }
           }}
           onChange={(e) => setQuery(e.target.value)}
@@ -45,9 +52,9 @@ const SearchBox = ({
           <div
             key={index}
             onClick={() => {
-              setSearchNew(true)
-              setQuery('')
-              setHamOpen(false)
+              setSearchNew(true);
+              setQuery("");
+              setHamOpen(false);
             }}
           >
             <SidebarContact
@@ -61,10 +68,10 @@ const SearchBox = ({
               message={data?.user_name}
             />
           </div>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
-export default SearchBox
+export default SearchBox;
