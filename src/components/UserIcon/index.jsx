@@ -15,6 +15,7 @@ const UserIcon = ({ size, src, username }) => {
       break
     default:
       dim = '50px'
+      break
   }
 
   return (
